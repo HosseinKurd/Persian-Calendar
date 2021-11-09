@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="workCalendarModel"
+            type="modularization.libraries.dataSource.models.WorkCalendarModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingTop="@dimen/padding_4dp"
+        android:paddingBottom="@dimen/padding_4dp">
+
+        <modularization.libraries.uicomponents.MagicalTextView
+            android:id="@+id/textview_day_of_month"
+            style="@style/AppTheme.TextView.Medium.Bold"
+            android:layout_width="@dimen/height_25dp"
+            android:background="@drawable/shape_oval_blue_light"
+            android:layout_height="@dimen/height_25dp"
+            android:text="@{workCalendarModel.dayOfMonth}"
+            android:textColor="@color/hint_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <modularization.libraries.uicomponents.MagicalTextView
+            android:id="@+id/textview_day_of_week"
+            style="@style/AppTheme.TextView.Medium.Bold"
+            android:layout_width="@dimen/height_25dp"
+            android:layout_height="@dimen/height_25dp"
+            android:paddingTop="@dimen/padding_8dp"
+            android:paddingBottom="@dimen/padding_8dp"
+            android:text="@{workCalendarModel.dayOfWeek}"
+            android:textColor="@color/color_edittext_disable"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_day_of_month" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
