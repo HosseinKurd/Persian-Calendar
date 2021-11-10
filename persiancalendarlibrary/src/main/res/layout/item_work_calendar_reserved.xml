@@ -6,37 +6,36 @@
 
         <variable
             name="workCalendarModel"
-            type="modularization.libraries.dataSource.models.WorkCalendarModel" />
+            type="com.hosseinkurd.app.persiancalendarlibrary.models.WorkCalendarModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout_parent"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/width_adapter_item_persian_calendar_library"
         android:layout_height="match_parent"
-        android:paddingTop="@dimen/padding_4dp"
-        android:paddingBottom="@dimen/padding_4dp">
+        android:paddingTop="@dimen/padding_small_persian_calendar_library"
+        android:paddingBottom="@dimen/padding_small_persian_calendar_library">
 
-        <modularization.libraries.uicomponents.MagicalTextView
+        <TextView
             android:id="@+id/textview_day_of_month"
-            style="@style/AppTheme.TextView.Medium.Bold"
-            android:layout_width="@dimen/height_25dp"
-            android:background="@drawable/shape_oval_blue_light"
-            android:layout_height="@dimen/height_25dp"
+            android:layout_width="@dimen/width_adapter_item_day_persian_calendar_library"
+            android:layout_height="@dimen/width_adapter_item_day_persian_calendar_library"
+            android:gravity="center"
+            android:background="@drawable/shape_oval_blue_light_persian_calendar_library"
             android:text="@{workCalendarModel.dayOfMonth}"
-            android:textColor="@color/hint_color"
+            android:textColor="@color/black_persian_calendar_library"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <modularization.libraries.uicomponents.MagicalTextView
+        <TextView
             android:id="@+id/textview_day_of_week"
-            style="@style/AppTheme.TextView.Medium.Bold"
-            android:layout_width="@dimen/height_25dp"
-            android:layout_height="@dimen/height_25dp"
-            android:paddingTop="@dimen/padding_8dp"
-            android:paddingBottom="@dimen/padding_8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/padding_medium_persian_calendar_library"
+            android:paddingBottom="@dimen/padding_medium_persian_calendar_library"
             android:text="@{workCalendarModel.dayOfWeek}"
-            android:textColor="@color/color_edittext_disable"
+            android:textColor="@color/black_persian_calendar_library"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textview_day_of_month" />

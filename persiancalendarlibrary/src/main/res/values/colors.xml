@@ -2,7 +2,9 @@
 <resources>
     <color name="black_persian_calendar_library">#FF000000</color>
     <color name="white_persian_calendar_library">#FFFFFFFF</color>
+    <color name="blue_dark_extra_persian_calendar_library">#112143</color>
     <color name="blue_light_extra_persian_calendar_library">#97CFF8</color>
     <color name="blue_light_persian_calendar_library">#4295D1</color>
-    <color name="gray_persian_calendar_library">#EFEFEF</color>
+    <color name="gray_dark_persian_calendar_library">#939598</color>
+    <color name="gray_light_persian_calendar_library">#BCBEC0</color>
 </resources>
