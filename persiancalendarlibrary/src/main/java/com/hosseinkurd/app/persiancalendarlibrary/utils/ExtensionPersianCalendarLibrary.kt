@@ -1,0 +1,10 @@
+package com.hosseinkurd.app.persiancalendarlibrary.utils
+
+import java.text.DecimalFormat
+import java.text.NumberFormat
+
+
+fun Int.twoDigitsPersianCalendarLibrary(): String {
+    val numberFormat: NumberFormat = DecimalFormat("00")
+    return numberFormat.format(this)
+}

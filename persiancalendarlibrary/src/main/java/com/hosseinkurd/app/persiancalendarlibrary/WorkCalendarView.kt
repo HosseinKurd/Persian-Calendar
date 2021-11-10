@@ -5,9 +5,9 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
+import com.hosseinkurd.app.persiancalendarlibrary.adapters.AbstractAdapter
 import com.hosseinkurd.app.persiancalendarlibrary.adapters.WorkCalendarAdapter
 import com.hosseinkurd.app.persiancalendarlibrary.databinding.WorkCalendarViewBinding
-import com.hosseinkurd.app.persiancalendarlibrary.enums.EnumWorkCalendarState
 import com.hosseinkurd.app.persiancalendarlibrary.interfaces.OnClickListenerPersianCalendarLibrary
 import com.hosseinkurd.app.persiancalendarlibrary.models.WorkCalendarModel
 
@@ -46,10 +46,18 @@ class WorkCalendarView @JvmOverloads constructor(
 
     private fun initializeListeners() {
         binding.imageViewStart.setOnClickListener {
-            onClickListenerPersianCalendarLibrary?.onPersianCalendarLibraryClicked(it.id, null)
+            onClickListenerPersianCalendarLibrary?.onPersianCalendarLibraryStartClicked()
         }
         binding.imageViewEnd.setOnClickListener {
-            onClickListenerPersianCalendarLibrary?.onPersianCalendarLibraryClicked(it.id, null)
+            onClickListenerPersianCalendarLibrary?.onPersianCalendarLibraryEndClicked()
+        }
+        binding.recyclerView.adapter?.let { adapter ->
+            if (adapter is WorkCalendarAdapter) adapter.onItemClickListener =
+                object : AbstractAdapter.OnItemClickListener<WorkCalendarModel> {
+                    override fun onClicked(actionId: Int, position: Int, item: WorkCalendarModel) {
+                        
+                    }
+                }
         }
     }
 

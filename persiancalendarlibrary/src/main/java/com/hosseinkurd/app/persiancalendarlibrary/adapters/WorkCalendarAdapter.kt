@@ -62,27 +62,51 @@ class WorkCalendarAdapter(
         holder.onFill(position = position)
     }
 
-    inner class ViewHolderWorkCalendarNormal(val binding: ItemWorkCalendarNormalBinding) :
+    inner class ViewHolderWorkCalendarNormal(private val binding: ItemWorkCalendarNormalBinding) :
         AbstractViewHolder(binding) {
         override fun onFill(position: Int) {
+            println("Normal >> items : ${items[position]} , position: $position")
             binding.textviewDayOfMonth.text = items[position].dayOfMonth
             binding.textviewDayOfWeek.text = items[position].dayOfWeek
+            binding.constraintLayoutParent.setOnClickListener {
+                onItemClickListener?.onClicked(
+                    actionId = it.id,
+                    position = position,
+                    item = items[position]
+                )
+            }
         }
     }
 
-    inner class ViewHolderWorkCalendarReserved(val binding: ItemWorkCalendarReservedBinding) :
+    inner class ViewHolderWorkCalendarReserved(private val binding: ItemWorkCalendarReservedBinding) :
         AbstractViewHolder(binding) {
         override fun onFill(position: Int) {
+            println("Reserved >> items : ${items[position]} , position: $position")
             binding.textviewDayOfMonth.text = items[position].dayOfMonth
             binding.textviewDayOfWeek.text = items[position].dayOfWeek
+            binding.constraintLayoutParent.setOnClickListener {
+                onItemClickListener?.onClicked(
+                    actionId = it.id,
+                    position = position,
+                    item = items[position]
+                )
+            }
         }
     }
 
-    inner class ViewHolderWorkCalendarSelected(val binding: ItemWorkCalendarSelectedBinding) :
+    inner class ViewHolderWorkCalendarSelected(private val binding: ItemWorkCalendarSelectedBinding) :
         AbstractViewHolder(binding) {
         override fun onFill(position: Int) {
+            println("Selected >> items : ${items[position]} , position: $position")
             binding.textviewDayOfMonth.text = items[position].dayOfMonth
             binding.textviewDayOfWeek.text = items[position].dayOfWeek
+            binding.constraintLayoutParent.setOnClickListener {
+                onItemClickListener?.onClicked(
+                    actionId = it.id,
+                    position = position,
+                    item = items[position]
+                )
+            }
         }
     }
 
