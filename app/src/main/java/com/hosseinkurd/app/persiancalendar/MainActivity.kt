@@ -34,6 +34,8 @@ class MainActivity : AppCompatActivity() {
                 }
 
             }
+        initRecyclerView()
+        addItemsToCalendar()
         /*val itemWidth = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             val windowMetrics: WindowMetrics =
                 windowManager.currentWindowMetrics
@@ -47,8 +49,11 @@ class MainActivity : AppCompatActivity() {
         }*/
     }
 
-    override fun onResume() {
-        super.onResume()
+    private fun initRecyclerView() {
+
+    }
+
+    private fun addItemsToCalendar() {
         val list: MutableList<WorkCalendarModel> = mutableListOf()
         list.apply {
             add(

@@ -13,10 +13,9 @@ import com.hosseinkurd.app.persiancalendarlibrary.enums.EnumWorkCalendarState
 import com.hosseinkurd.app.persiancalendarlibrary.models.WorkCalendarModel
 
 class WorkCalendarAdapter(
-    context: Context?, items: MutableList<WorkCalendarModel>
+    context: Context?,
 ) : AbstractAdapter<WorkCalendarAdapter.AbstractViewHolder, WorkCalendarModel>(
     context!!,
-    items
 ) {
 
     override fun getItemViewType(position: Int): Int {
@@ -66,8 +65,7 @@ class WorkCalendarAdapter(
         AbstractViewHolder(binding) {
         override fun onFill(position: Int) {
             println("Normal >> items : ${items[position]} , position: $position")
-            binding.textviewDayOfMonth.text = items[position].dayOfMonth
-            binding.textviewDayOfWeek.text = items[position].dayOfWeek
+            binding.workCalendarModel = getItem(position = position)
             binding.constraintLayoutParent.setOnClickListener {
                 onItemClickListener?.onClicked(
                     actionId = it.id,
@@ -82,8 +80,7 @@ class WorkCalendarAdapter(
         AbstractViewHolder(binding) {
         override fun onFill(position: Int) {
             println("Reserved >> items : ${items[position]} , position: $position")
-            binding.textviewDayOfMonth.text = items[position].dayOfMonth
-            binding.textviewDayOfWeek.text = items[position].dayOfWeek
+            binding.workCalendarModel = getItem(position = position)
             binding.constraintLayoutParent.setOnClickListener {
                 onItemClickListener?.onClicked(
                     actionId = it.id,
@@ -98,8 +95,7 @@ class WorkCalendarAdapter(
         AbstractViewHolder(binding) {
         override fun onFill(position: Int) {
             println("Selected >> items : ${items[position]} , position: $position")
-            binding.textviewDayOfMonth.text = items[position].dayOfMonth
-            binding.textviewDayOfWeek.text = items[position].dayOfWeek
+            binding.workCalendarModel = getItem(position = position)
             binding.constraintLayoutParent.setOnClickListener {
                 onItemClickListener?.onClicked(
                     actionId = it.id,

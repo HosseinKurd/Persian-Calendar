@@ -35,13 +35,21 @@ class WorkCalendarView @JvmOverloads constructor(
 
     fun addItems(list: MutableList<WorkCalendarModel>) {
         context?.let {
-            binding.recyclerView.adapter =
-                WorkCalendarAdapter(context = it, items = list)
+            binding.recyclerView.adapter?.let { adapter ->
+                if (adapter is WorkCalendarAdapter) {
+                    adapter.items.addAll(list)
+                    adapter.notifyDataSetChanged()
+                }
+            }
         }
     }
 
     private fun initializeView() {
         binding.recyclerView.setHasFixedSize(true)
+        context?.let {
+            binding.recyclerView.adapter =
+                WorkCalendarAdapter(context = it)
+        }
     }
 
     private fun initializeListeners() {
@@ -55,7 +63,7 @@ class WorkCalendarView @JvmOverloads constructor(
             if (adapter is WorkCalendarAdapter) adapter.onItemClickListener =
                 object : AbstractAdapter.OnItemClickListener<WorkCalendarModel> {
                     override fun onClicked(actionId: Int, position: Int, item: WorkCalendarModel) {
-                        
+
                     }
                 }
         }
