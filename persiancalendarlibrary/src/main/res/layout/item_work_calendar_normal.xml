@@ -13,6 +13,7 @@
         android:id="@+id/constraintLayout_parent"
         android:layout_width="@dimen/width_adapter_item_persian_calendar_library"
         android:layout_height="match_parent"
+        android:foreground="?attr/selectableItemBackground"
         android:paddingTop="@dimen/padding_small_persian_calendar_library"
         android:paddingBottom="@dimen/padding_small_persian_calendar_library">
 
@@ -31,10 +32,10 @@
             android:id="@+id/textview_day_of_week"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:paddingTop="@dimen/padding_medium_persian_calendar_library"
             android:paddingBottom="@dimen/padding_medium_persian_calendar_library"
             android:text="@{workCalendarModel.dayOfWeek}"
-            android:gravity="center"
             android:textColor="@color/black_persian_calendar_library"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

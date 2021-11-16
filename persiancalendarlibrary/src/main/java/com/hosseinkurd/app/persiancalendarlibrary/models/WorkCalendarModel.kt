@@ -13,7 +13,8 @@ class WorkCalendarModel(
     var workCalendarState
     : EnumWorkCalendarState = EnumWorkCalendarState.NORMAL_DAY,
     var isoDate: String? = null,
-    var persianDate: String? = null
+    var persianDate: String? = null,
+    var dailyWorkCalendarModels: MutableList<DailyWorkCalendarModel> = mutableListOf()
 ) : Parcelable {
     var dayOfMonth: String? = null
     var dayOfWeek: String? = null

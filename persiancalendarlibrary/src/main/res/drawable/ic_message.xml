@@ -1,0 +1,16 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="18dp"
+    android:height="18dp"
+    android:viewportWidth="18"
+    android:viewportHeight="18">
+  <group>
+    <clip-path
+        android:pathData="M0,0h18v18h-18z"/>
+    <path
+        android:pathData="M13.192,0.71L1.731,0.71A1.555,1.555 0,0 0,0.178 2.263v8.285A1.555,1.555 0,0 0,1.731 12.102L3.285,12.102v2.589a0.518,0.518 0,0 0,0.884 0.366l2.8,-2.8a0.517,0.517 0,0 1,0.366 -0.152h5.854a1.555,1.555 0,0 0,1.553 -1.553L14.742,2.263A1.555,1.555 0,0 0,13.192 0.71ZM2.767,3.817L10.085,3.817a0.518,0.518 0,0 1,0 1.036L2.767,4.853a0.518,0.518 0,1 1,0 -1.036ZM8.014,8.995L2.767,8.995a0.518,0.518 0,1 1,0 -1.036L8.014,7.959a0.518,0.518 0,0 1,0 1.036ZM12.157,6.922L2.767,6.922a0.518,0.518 0,1 1,0 -1.036h9.39a0.518,0.518 0,1 1,0 1.036Z"
+        android:fillColor="@color/white_persian_calendar_library"/>
+    <path
+        android:pathData="M16.299,2.781L15.786,2.781v7.767a2.6,2.6 0,0 1,-2.6 2.589h-5.57l-1.1,1.029h4.389l2.955,2.962a0.518,0.518 0,0 0,0.884 -0.366v-2.6h1.553a1.549,1.549 0,0 0,1.553 -1.547L17.85,4.334A1.555,1.555 0,0 0,16.299 2.781Z"
+        android:fillColor="@color/white_persian_calendar_library"/>
+  </group>
+</vector>

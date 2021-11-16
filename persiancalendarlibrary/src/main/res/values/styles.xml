@@ -1,14 +1,38 @@
 <resources>
-    <declare-styleable name="WorkCalendarView">
-        <attr name="lineWidth" format="dimension"/>
-        <attr name="badgeCircleRadius" format="dimension"/>
-        <attr name="showAboveLine" format="boolean"/>
-        <attr name="showBelowLine" format="boolean"/>
+
+    <style name="AppTheme.TextView.Base" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/black_persian_calendar_library</item>
+        <item name="android:fontFamily">@font/app_font</item>
+        <item name="fontStyle">normal</item>
+    </style>
+
+    <style name="AppTheme.TextView.Medium" parent="AppTheme.TextView.Base">
+        <item name="android:textSize">@dimen/text_size_content</item>
+    </style>
+
+    <style name="AppTheme.TextView.Titre" parent="AppTheme.TextView.Medium">
+        <item name="android:textSize">@dimen/text_size_titre</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:maxLines">2</item>
+    </style>
+
+    <style name="AppTheme.TextView.Title" parent="AppTheme.TextView.Medium">
+        <item name="android:textSize">@dimen/text_size_title</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:maxLines">2</item>
+    </style>
+
+    <!--<declare-styleable name="WorkCalendarView">
+        <attr name="lineWidth" format="dimension" />
+        <attr name="badgeCircleRadius" format="dimension" />
+        <attr name="showAboveLine" format="boolean" />
+        <attr name="showBelowLine" format="boolean" />
         <attr name="belowLineCompleted" format="enum">
-            <enum name="ZERO" value="0"/>
-            <enum name="ONE" value="1"/>
-            <enum name="TWO" value="2"/>
+            <enum name="ZERO" value="0" />
+            <enum name="ONE" value="1" />
+            <enum name="TWO" value="2" />
         </attr>
-        <attr name="stateTitle" format="string|reference"/>
-    </declare-styleable>
+        <attr name="stateTitle" format="string|reference" />
+    </declare-styleable>-->
+
 </resources>

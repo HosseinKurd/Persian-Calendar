@@ -64,7 +64,6 @@ class WorkCalendarAdapter(
     inner class ViewHolderWorkCalendarNormal(private val binding: ItemWorkCalendarNormalBinding) :
         AbstractViewHolder(binding) {
         override fun onFill(position: Int) {
-            println("Normal >> items : ${items[position]} , position: $position")
             binding.workCalendarModel = getItem(position = position)
             binding.constraintLayoutParent.setOnClickListener {
                 onItemClickListener?.onClicked(
@@ -79,7 +78,6 @@ class WorkCalendarAdapter(
     inner class ViewHolderWorkCalendarReserved(private val binding: ItemWorkCalendarReservedBinding) :
         AbstractViewHolder(binding) {
         override fun onFill(position: Int) {
-            println("Reserved >> items : ${items[position]} , position: $position")
             binding.workCalendarModel = getItem(position = position)
             binding.constraintLayoutParent.setOnClickListener {
                 onItemClickListener?.onClicked(
@@ -94,7 +92,6 @@ class WorkCalendarAdapter(
     inner class ViewHolderWorkCalendarSelected(private val binding: ItemWorkCalendarSelectedBinding) :
         AbstractViewHolder(binding) {
         override fun onFill(position: Int) {
-            println("Selected >> items : ${items[position]} , position: $position")
             binding.workCalendarModel = getItem(position = position)
             binding.constraintLayoutParent.setOnClickListener {
                 onItemClickListener?.onClicked(

@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="text_size_content">12sp</dimen>
+    <dimen name="text_size_titre">14sp</dimen>
+    <dimen name="text_size_title">16sp</dimen>
     <dimen name="radius_persian_calendar_library">4dp</dimen>
     <dimen name="padding_small_persian_calendar_library">4dp</dimen>
     <dimen name="padding_medium_persian_calendar_library">8dp</dimen>
-    <dimen name="width_adapter_item_persian_calendar_library">@dimen/_44sdp</dimen>
     <dimen name="width_adapter_item_day_persian_calendar_library">30dp</dimen>
+    <dimen name="width_adapter_item_avatar_persian_calendar_library">34dp</dimen>
+    <dimen name="width_adapter_item_persian_calendar_library">@dimen/_44sdp</dimen>
 </resources>
