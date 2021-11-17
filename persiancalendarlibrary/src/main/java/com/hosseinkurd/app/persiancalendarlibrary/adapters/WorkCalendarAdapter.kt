@@ -77,8 +77,8 @@ class WorkCalendarAdapter(
         AbstractViewHolder(binding) {
         override fun onFill(position: Int) {
             if (getItem(position = position).isSelected) {
-                binding.constraintLayoutParent.setBackgroundResource(R.drawable.background_underline_blue_dark)
-            } else binding.constraintLayoutParent.setBackgroundResource(0)
+                binding.viewUnderline.setBackgroundResource(R.drawable.background_underline_blue_dark)
+            } else binding.viewUnderline.setBackgroundResource(0)
             binding.workCalendarModel = getItem(position = position)
             binding.constraintLayoutParent.setOnClickListener {
                 onItemClickListener?.onClicked(
@@ -94,8 +94,8 @@ class WorkCalendarAdapter(
         AbstractViewHolder(binding) {
         override fun onFill(position: Int) {
             if (getItem(position = position).isSelected) {
-                binding.constraintLayoutParent.setBackgroundResource(R.drawable.background_underline_blue_dark)
-            } else binding.constraintLayoutParent.setBackgroundResource(0)
+                binding.viewUnderline.setBackgroundResource(R.drawable.background_underline_blue_dark)
+            } else binding.viewUnderline.setBackgroundResource(0)
             binding.workCalendarModel = getItem(position = position)
             binding.constraintLayoutParent.setOnClickListener {
                 onItemClickListener?.onClicked(
@@ -111,8 +111,8 @@ class WorkCalendarAdapter(
         AbstractViewHolder(binding) {
         override fun onFill(position: Int) {
             if (getItem(position = position).isSelected) {
-                binding.constraintLayoutParent.setBackgroundResource(R.drawable.background_underline_blue_dark)
-            } else binding.constraintLayoutParent.setBackgroundResource(0)
+                binding.viewUnderline.setBackgroundResource(R.drawable.background_underline_blue_dark)
+            } else binding.viewUnderline.setBackgroundResource(0)
             binding.workCalendarModel = getItem(position = position)
             binding.constraintLayoutParent.setOnClickListener {
                 onItemClickListener?.onClicked(

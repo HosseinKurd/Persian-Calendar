@@ -8,6 +8,7 @@
         <entry key="..\:/dev/android/projects/PersianCalendar/persiancalendarlibrary/src/main/res/drawable/dr_click_persian_calendar_library.xml" value="0.36512820512820515" />
         <entry key="..\:/dev/android/projects/PersianCalendar/persiancalendarlibrary/src/main/res/drawable/ic_arrow_forward.xml" value="0.36512820512820515" />
         <entry key="..\:/dev/android/projects/PersianCalendar/persiancalendarlibrary/src/main/res/drawable/ic_arrow_forward_persian_calendar_library.xml" value="0.36512820512820515" />
+        <entry key="..\:/dev/android/projects/PersianCalendar/persiancalendarlibrary/src/main/res/drawable/ic_ic_arrow_backward_persian_calendar_library.xml" value="0.37083333333333335" />
         <entry key="..\:/dev/android/projects/PersianCalendar/persiancalendarlibrary/src/main/res/drawable/ic_launcher_background.xml" value="0.36512820512820515" />
         <entry key="..\:/dev/android/projects/PersianCalendar/persiancalendarlibrary/src/main/res/drawable/ic_message.xml" value="0.37083333333333335" />
         <entry key="..\:/dev/android/projects/PersianCalendar/persiancalendarlibrary/src/main/res/drawable/ic_user_default_persian_calendar_library.xml" value="0.37083333333333335" />
@@ -24,7 +25,7 @@
         <entry key="..\:/dev/android/projects/PersianCalendar/persiancalendarlibrary/src/main/res/layout/item_work_calendar_reserved.xml" value="0.276268115942029" />
         <entry key="..\:/dev/android/projects/PersianCalendar/persiancalendarlibrary/src/main/res/layout/item_work_calendar_selected.xml" value="0.276268115942029" />
         <entry key="..\:/dev/android/projects/PersianCalendar/persiancalendarlibrary/src/main/res/layout/magical_work_calendar_view.xml" value="0.28306159420289856" />
-        <entry key="..\:/dev/android/projects/PersianCalendar/persiancalendarlibrary/src/main/res/layout/work_calendar_view.xml" value="0.22" />
+        <entry key="..\:/dev/android/projects/PersianCalendar/persiancalendarlibrary/src/main/res/layout/work_calendar_view.xml" value="0.25" />
       </map>
     </option>
   </component>

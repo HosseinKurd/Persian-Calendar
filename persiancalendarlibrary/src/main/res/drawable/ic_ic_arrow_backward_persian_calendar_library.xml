@@ -8,7 +8,7 @@
     <clip-path
         android:pathData="M0,0h16v16h-16z"/>
     <path
-        android:pathData="M11.437,7.907 L5.369,1.839A0.4,0.4 0,0 0,4.797 2.411L10.608,8.22 4.797,13.975a0.4,0.4 0,1 0,0.572 0.572L11.437,8.479A0.4,0.4 0,0 0,11.437 7.907Z"
+        android:pathData="M4.564,7.907 L10.632,1.839a0.4,0.4 0,0 1,0.572 0.572L5.393,8.22l5.811,5.753a0.4,0.4 0,1 1,-0.572 0.572L4.563,8.479A0.4,0.4 0,0 1,4.564 7.907Z"
         android:strokeWidth="1"
         android:fillColor="@color/white_persian_calendar_library"
         android:strokeColor="@color/white_persian_calendar_library"/>
