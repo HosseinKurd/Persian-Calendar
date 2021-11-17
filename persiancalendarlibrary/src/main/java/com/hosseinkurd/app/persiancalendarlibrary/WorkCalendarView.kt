@@ -5,11 +5,9 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.SnapHelper
 import com.hosseinkurd.app.persiancalendarlibrary.adapters.AbstractAdapter
-import com.hosseinkurd.app.persiancalendarlibrary.adapters.DailyWorkCalendarAdapter
 import com.hosseinkurd.app.persiancalendarlibrary.adapters.WorkCalendarAdapter
 import com.hosseinkurd.app.persiancalendarlibrary.databinding.WorkCalendarViewBinding
 import com.hosseinkurd.app.persiancalendarlibrary.enums.EnumWorkCalendarState
@@ -56,15 +54,11 @@ class WorkCalendarView @JvmOverloads constructor(
         binding.recyclerViewDay.adapter?.let { adapter ->
             if (adapter is WorkCalendarAdapter) {
                 adapter.items.firstOrNull {
-                    it.workCalendarState == EnumWorkCalendarState.SELECTED_DAY
+                    it.workCalendarState == EnumWorkCalendarState.TODAY
                 }?.let { item ->
                     val index = adapter.items.indexOf(item)
                     binding.recyclerViewDay.smoothScrollToPosition(index)
                     binding.textViewTitle.text = getYearMonth(item.isoDate!!)
-                    context?.let {
-                        binding.recyclerViewTask.adapter =
-                            DailyWorkCalendarAdapter(it, item.dailyWorkCalendarModels)
-                    }
                 }
             }
 
@@ -82,12 +76,16 @@ class WorkCalendarView @JvmOverloads constructor(
                 }?.let { item ->
                     val index = adapter.items.indexOf(item)
                     binding.recyclerViewDay.smoothScrollToPosition(index)
-                    context?.let {
-                        binding.recyclerViewTask.adapter =
-                            DailyWorkCalendarAdapter(it, item.dailyWorkCalendarModels)
-                    }
                 }
             }
+        }
+    }
+
+    fun changeSelectedItem(
+        item: WorkCalendarModel,
+    ) {
+        binding.recyclerViewDay.adapter?.let { adapter ->
+            if (adapter is WorkCalendarAdapter) adapter.changeSelectedItem(item)
         }
     }
 
@@ -105,12 +103,6 @@ class WorkCalendarView @JvmOverloads constructor(
         context?.let {
             binding.recyclerViewDay.adapter =
                 WorkCalendarAdapter(context = it)
-            binding.recyclerViewTask.addItemDecoration(
-                DividerItemDecoration(
-                    it,
-                    DividerItemDecoration.VERTICAL
-                )
-            )
         }
         val snapHelper: SnapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(binding.recyclerViewDay)
@@ -127,11 +119,7 @@ class WorkCalendarView @JvmOverloads constructor(
             if (adapter is WorkCalendarAdapter) adapter.onItemClickListener =
                 object : AbstractAdapter.OnItemClickListener<WorkCalendarModel> {
                     override fun onClicked(actionId: Int, position: Int, item: WorkCalendarModel) {
-                        binding.textViewTitle.text = getYearMonth(item.isoDate!!)
-                        context?.let {
-                            binding.recyclerViewTask.adapter =
-                                DailyWorkCalendarAdapter(it, item.dailyWorkCalendarModels)
-                        }
+                        onClickListenerPersianCalendarLibrary?.onPersianCalendarLibraryClicked(item)
                     }
                 }
         }

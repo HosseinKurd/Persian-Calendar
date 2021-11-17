@@ -10,6 +10,10 @@
         <item name="android:textSize">@dimen/text_size_content</item>
     </style>
 
+    <style name="AppTheme.TextView.Description" parent="AppTheme.TextView.Base">
+        <item name="android:textSize">@dimen/text_size_description</item>
+    </style>
+
     <style name="AppTheme.TextView.Titre" parent="AppTheme.TextView.Medium">
         <item name="android:textSize">@dimen/text_size_titre</item>
         <item name="android:textStyle">bold</item>

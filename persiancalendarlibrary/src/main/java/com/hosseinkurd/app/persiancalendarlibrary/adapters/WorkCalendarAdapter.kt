@@ -36,7 +36,7 @@ class WorkCalendarAdapter(
                 )
                 ViewHolderWorkCalendarReserved(binding)
             }
-            EnumWorkCalendarState.SELECTED_DAY.state -> {
+            EnumWorkCalendarState.TODAY.state -> {
                 val binding: ItemWorkCalendarSelectedBinding = DataBindingUtil.inflate(
                     LayoutInflater.from(parent.context),
                     R.layout.item_work_calendar_selected,
@@ -61,9 +61,24 @@ class WorkCalendarAdapter(
         holder.onFill(position = position)
     }
 
+    fun changeSelectedItem(
+        item: WorkCalendarModel,
+    ) {
+        items.firstOrNull { it.isSelected }
+            ?.let {
+                it.isSelected = false
+                notifyItemChanged(items.indexOf(it))
+            }
+        item.isSelected = true
+        notifyItemChanged(items.indexOf(item))
+    }
+
     inner class ViewHolderWorkCalendarNormal(private val binding: ItemWorkCalendarNormalBinding) :
         AbstractViewHolder(binding) {
         override fun onFill(position: Int) {
+            if (getItem(position = position).isSelected) {
+                binding.constraintLayoutParent.setBackgroundResource(R.drawable.background_underline_blue_dark)
+            } else binding.constraintLayoutParent.setBackgroundResource(0)
             binding.workCalendarModel = getItem(position = position)
             binding.constraintLayoutParent.setOnClickListener {
                 onItemClickListener?.onClicked(
@@ -78,6 +93,9 @@ class WorkCalendarAdapter(
     inner class ViewHolderWorkCalendarReserved(private val binding: ItemWorkCalendarReservedBinding) :
         AbstractViewHolder(binding) {
         override fun onFill(position: Int) {
+            if (getItem(position = position).isSelected) {
+                binding.constraintLayoutParent.setBackgroundResource(R.drawable.background_underline_blue_dark)
+            } else binding.constraintLayoutParent.setBackgroundResource(0)
             binding.workCalendarModel = getItem(position = position)
             binding.constraintLayoutParent.setOnClickListener {
                 onItemClickListener?.onClicked(
@@ -92,6 +110,9 @@ class WorkCalendarAdapter(
     inner class ViewHolderWorkCalendarSelected(private val binding: ItemWorkCalendarSelectedBinding) :
         AbstractViewHolder(binding) {
         override fun onFill(position: Int) {
+            if (getItem(position = position).isSelected) {
+                binding.constraintLayoutParent.setBackgroundResource(R.drawable.background_underline_blue_dark)
+            } else binding.constraintLayoutParent.setBackgroundResource(0)
             binding.workCalendarModel = getItem(position = position)
             binding.constraintLayoutParent.setOnClickListener {
                 onItemClickListener?.onClicked(

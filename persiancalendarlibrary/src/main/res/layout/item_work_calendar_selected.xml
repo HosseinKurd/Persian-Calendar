@@ -14,12 +14,12 @@
         android:layout_width="@dimen/width_adapter_item_persian_calendar_library"
         android:layout_height="match_parent"
         android:foreground="?attr/selectableItemBackground"
-        android:background="@drawable/background_underline_blue_dark"
         android:paddingTop="@dimen/padding_small_persian_calendar_library"
         android:paddingBottom="@dimen/padding_small_persian_calendar_library">
 
         <TextView
             android:id="@+id/textview_day_of_month"
+            style="@style/AppTheme.TextView.Medium"
             android:layout_width="@dimen/width_adapter_item_day_persian_calendar_library"
             android:layout_height="@dimen/width_adapter_item_day_persian_calendar_library"
             android:background="@drawable/shape_oval_purple_dark_persian_calendar_library"
@@ -32,6 +32,7 @@
 
         <TextView
             android:id="@+id/textview_day_of_week"
+            style="@style/AppTheme.TextView.Description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/padding_medium_persian_calendar_library"

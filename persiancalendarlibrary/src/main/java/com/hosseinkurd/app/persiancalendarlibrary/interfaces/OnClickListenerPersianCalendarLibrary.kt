@@ -5,5 +5,5 @@ import com.hosseinkurd.app.persiancalendarlibrary.models.WorkCalendarModel
 interface OnClickListenerPersianCalendarLibrary {
     fun onPersianCalendarLibraryStartClicked()
     fun onPersianCalendarLibraryEndClicked()
-    fun onPersianCalendarLibraryClicked(viewId: Int, workCalendarModel: WorkCalendarModel?)
+    fun onPersianCalendarLibraryClicked(workCalendarModel: WorkCalendarModel)
 }

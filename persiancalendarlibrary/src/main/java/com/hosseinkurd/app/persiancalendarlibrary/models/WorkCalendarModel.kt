@@ -10,11 +10,12 @@ import java.util.*
 
 @Parcelize
 class WorkCalendarModel(
+    var id: String = "",
     var workCalendarState
     : EnumWorkCalendarState = EnumWorkCalendarState.NORMAL_DAY,
     var isoDate: String? = null,
     var persianDate: String? = null,
-    var dailyWorkCalendarModels: MutableList<DailyWorkCalendarModel> = mutableListOf()
+    var isSelected: Boolean = false,
 ) : Parcelable {
     var dayOfMonth: String? = null
     var dayOfWeek: String? = null

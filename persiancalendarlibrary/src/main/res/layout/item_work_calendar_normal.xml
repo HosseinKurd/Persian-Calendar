@@ -19,6 +19,7 @@
 
         <TextView
             android:id="@+id/textview_day_of_month"
+            style="@style/AppTheme.TextView.Medium"
             android:layout_width="@dimen/width_adapter_item_day_persian_calendar_library"
             android:layout_height="@dimen/width_adapter_item_day_persian_calendar_library"
             android:gravity="center"
@@ -30,6 +31,7 @@
 
         <TextView
             android:id="@+id/textview_day_of_week"
+            style="@style/AppTheme.TextView.Description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
