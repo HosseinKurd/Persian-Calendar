@@ -5,7 +5,7 @@
     <dimen name="text_size_content">12sp</dimen>
     <dimen name="text_size_titre">14sp</dimen>
     <dimen name="text_size_title">16sp</dimen>
-    <dimen name="recyclerview_day_margin_top_persian_calendar_library">16dp</dimen>
+    <dimen name="recyclerview_day_margin_top_persian_calendar_library">@dimen/_10sdp</dimen>
     <dimen name="radius_persian_calendar_library">2dp</dimen>
     <dimen name="padding_small_persian_calendar_library">4dp</dimen>
     <dimen name="padding_medium_persian_calendar_library">8dp</dimen>

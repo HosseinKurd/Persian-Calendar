@@ -26,17 +26,19 @@
         <item name="android:maxLines">2</item>
     </style>
 
-    <!--<declare-styleable name="WorkCalendarView">
-        <attr name="lineWidth" format="dimension" />
-        <attr name="badgeCircleRadius" format="dimension" />
-        <attr name="showAboveLine" format="boolean" />
-        <attr name="showBelowLine" format="boolean" />
-        <attr name="belowLineCompleted" format="enum">
+    <declare-styleable name="WorkCalendarView">
+        <attr name="dayListMarginTop" format="dimension" />
+        <attr name="weekCalendarBackgroundStart" format="reference" />
+        <attr name="weekCalendarBackgroundEnd" format="reference" />
+        <attr name="weekCalendarSrcStart" format="reference" />
+        <attr name="weekCalendarSrcEnd" format="reference" />
+        <attr name="stateTitle" format="string|reference" />
+        <!--<attr name="showAboveLine" format="boolean" />-->
+       <!-- <attr name="belowLineCompleted" format="enum">
             <enum name="ZERO" value="0" />
             <enum name="ONE" value="1" />
             <enum name="TWO" value="2" />
-        </attr>
-        <attr name="stateTitle" format="string|reference" />
-    </declare-styleable>-->
+        </attr>-->
+    </declare-styleable>
 
 </resources>

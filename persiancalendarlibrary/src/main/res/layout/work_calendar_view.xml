@@ -16,9 +16,8 @@
             android:background="@drawable/dr_click_persian_calendar_library"
             android:contentDescription="@string/app_name"
             android:padding="4dp"
-            android:rotationY="180"
             android:scaleType="fitXY"
-            android:src="@drawable/ic_arrow_forward_persian_calendar_library"
+            android:src="@drawable/ic_arrow_start_persian_calendar_library"
             app:layout_constraintBottom_toBottomOf="@id/textView_title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/textView_title" />
@@ -44,7 +43,7 @@
             android:contentDescription="@string/app_name"
             android:padding="4dp"
             android:scaleType="fitXY"
-            android:src="@drawable/ic_arrow_forward_persian_calendar_library"
+            android:src="@drawable/ic_arrow_end_persian_calendar_library"
             app:layout_constraintBottom_toBottomOf="@id/textView_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/textView_title" />

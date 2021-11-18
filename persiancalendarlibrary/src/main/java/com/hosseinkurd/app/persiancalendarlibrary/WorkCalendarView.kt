@@ -35,7 +35,7 @@ class WorkCalendarView @JvmOverloads constructor(
         val inflater =
             (getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater)
         binding = DataBindingUtil.inflate(inflater, R.layout.work_calendar_view, this, true)
-        initializeView()
+        initializeView(attributeSet, defStyleAttr)
         initializeListeners()
     }
 
@@ -98,7 +98,41 @@ class WorkCalendarView @JvmOverloads constructor(
         return persianYearMonth
     }
 
-    private fun initializeView() {
+    private fun initializeView(attributeSet: AttributeSet? = null, defStyleAttr: Int) {
+        if (attributeSet != null) {
+            val typedArray = context.obtainStyledAttributes(
+                attributeSet,
+                R.styleable.WorkCalendarView,
+                defStyleAttr,
+                0
+            )
+            val dayListMarginTop = typedArray.getDimension(
+                R.styleable.WorkCalendarView_dayListMarginTop,
+                context.resources.getDimension(R.dimen.recyclerview_day_margin_top_persian_calendar_library)
+            )
+            val weekCalendarBackgroundStart = typedArray.getDrawable(
+                R.styleable.WorkCalendarView_weekCalendarBackgroundStart,
+            )
+            val weekCalendarBackgroundEnd = typedArray.getDrawable(
+                R.styleable.WorkCalendarView_weekCalendarBackgroundEnd,
+            )
+            val weekCalendarSrcStart = typedArray.getDrawable(
+                R.styleable.WorkCalendarView_weekCalendarSrcStart,
+            )
+            val weekCalendarSrcEnd = typedArray.getDrawable(
+                R.styleable.WorkCalendarView_weekCalendarSrcEnd,
+            )
+            (binding.recyclerViewDay.layoutParams as MarginLayoutParams).setMargins(
+                0,
+                dayListMarginTop.toInt(),
+                0,
+                0
+            )
+            weekCalendarBackgroundStart?.let { binding.imageViewStart.background = it }
+            weekCalendarBackgroundEnd?.let { binding.imageViewEnd.background = it }
+            weekCalendarSrcStart?.let { binding.imageViewStart.setImageDrawable(it) }
+            weekCalendarSrcEnd?.let { binding.imageViewEnd.setImageDrawable(it) }
+        }
         binding.recyclerViewDay.setHasFixedSize(true)
         context?.let {
             binding.recyclerViewDay.adapter =
