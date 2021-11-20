@@ -3,10 +3,9 @@ package com.hosseinkurd.app.persiancalendar
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.hosseinkurd.app.persiancalendarlibrary.WorkCalendarView
-import com.hosseinkurd.app.persiancalendarlibrary.enums.EnumWorkCalendarState
 import com.hosseinkurd.app.persiancalendarlibrary.interfaces.OnClickListenerPersianCalendarLibrary
+import com.hosseinkurd.app.persiancalendarlibrary.models.CalendarDayModel
 import com.hosseinkurd.app.persiancalendarlibrary.models.WorkCalendarModel
-import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -53,100 +52,41 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addItemsToCalendar() {
-        workCalendarView.addItems(mutableListOf<WorkCalendarModel>().apply { addAll(items) })
+        workCalendarView.addItems(mutableListOf<CalendarDayModel>().apply { addAll(items) })
         workCalendarView.showSelectedDayTasks()
     }
 
-    private val items = mutableListOf<WorkCalendarModel>().apply {
-        add(
-            WorkCalendarModel(
-                id = UUID.randomUUID().toString(),
-                workCalendarState = EnumWorkCalendarState.RESERVED_DAY,
-                isoDate = "2021-11-11T09:54:06.678+00:00",
-                persianDate = "۱۴۰۰/۰۸/۲۰"
-            )
-        )
-        add(
-            WorkCalendarModel(
-                id = UUID.randomUUID().toString(),
-                workCalendarState = EnumWorkCalendarState.NORMAL_DAY,
-                isoDate = "2021-11-12T09:54:06.678+00:00",
-                persianDate = "۱۴۰۰/۰۸/۲۱"
-            )
-        )
-        add(
-            WorkCalendarModel(
-                id = UUID.randomUUID().toString(),
-                workCalendarState = EnumWorkCalendarState.RESERVED_DAY,
-                isoDate = "2021-11-13T09:54:06.678+00:00",
-                persianDate = "۱۴۰۰/۰۸/۲۲"
-            )
-        )
-        add(
-            WorkCalendarModel(
-                id = UUID.randomUUID().toString(),
-                workCalendarState = EnumWorkCalendarState.NORMAL_DAY,
-                isoDate = "2021-11-14T09:54:06.678+00:00",
-                persianDate = "۱۴۰۰/۰۸/۲۳"
-            )
-        )
-        add(
-            WorkCalendarModel(
-                id = UUID.randomUUID().toString(),
-                workCalendarState = EnumWorkCalendarState.RESERVED_DAY,
-                isoDate = "2021-11-15T09:54:06.678+00:00",
-                persianDate = "۱۴۰۰/۰۸/۲۴"
-            )
-        )
-        add(
-            WorkCalendarModel(
-                id = UUID.randomUUID().toString(),
-                workCalendarState = EnumWorkCalendarState.NORMAL_DAY,
-                isoDate = "2021-11-16T09:54:06.678+00:00",
-                persianDate = "۱۴۰۰/۰۸/۲۵"
-            )
-        )
-        add(
-            WorkCalendarModel(
-                id = UUID.randomUUID().toString(),
-                workCalendarState = EnumWorkCalendarState.TODAY,
-                isoDate = "2021-11-17T09:54:06.678+00:00",
-                persianDate = "۱۴۰۰/۰۸/۲۶",
-                isSelected = true
-            )
-        )
-        add(
-            WorkCalendarModel(
-                id = UUID.randomUUID().toString(),
-                workCalendarState = EnumWorkCalendarState.NORMAL_DAY,
-                isoDate = "2021-11-18T09:54:06.678+00:00",
-                persianDate = "۱۴۰۰/۰۸/۲۷"
-            )
-        )
-        add(
-            WorkCalendarModel(
-                id = UUID.randomUUID().toString(),
-                workCalendarState = EnumWorkCalendarState.RESERVED_DAY,
-                isoDate = "2021-11-19T09:54:06.678+00:00",
-                persianDate = "۱۴۰۰/۰۸/۲۸"
-            )
-        )
-        add(
-            WorkCalendarModel(
-                id = UUID.randomUUID().toString(),
-                workCalendarState = EnumWorkCalendarState.NORMAL_DAY,
-                isoDate = "2021-11-20T09:54:06.678+00:00",
-                persianDate = "۱۴۰۰/۰۸/۲۹"
-            )
-        )
-        add(
-            WorkCalendarModel(
-                id = UUID.randomUUID().toString(),
-                workCalendarState = EnumWorkCalendarState.RESERVED_DAY,
-                isoDate = "2021-11-21T09:54:06.678+00:00",
-                persianDate = "۱۴۰۰/۰۸/۳۰"
-            )
-        )
+    private val items = mutableListOf<CalendarDayModel>().apply {
+        add(CalendarDayModel(isoDate = "2021-11-01T09:54:06.678+00:00"))
+        add(CalendarDayModel(isoDate = "2021-11-02T09:54:06.678+00:00"))
+        add(CalendarDayModel(isoDate = "2021-11-03T09:54:06.678+00:00"))
+        add(CalendarDayModel(isoDate = "2021-11-04T09:54:06.678+00:00"))
+        add(CalendarDayModel(isoDate = "2021-11-05T09:54:06.678+00:00"))
+        add(CalendarDayModel(isoDate = "2021-11-06T09:54:06.678+00:00"))
+        add(CalendarDayModel(isoDate = "2021-11-07T09:54:06.678+00:00"))
+        add(CalendarDayModel(isoDate = "2021-11-08T09:54:06.678+00:00"))
+        add(CalendarDayModel(isoDate = "2021-11-09T09:54:06.678+00:00"))
+        add(CalendarDayModel(isoDate = "2021-11-10T09:54:06.678+00:00"))
+        add(CalendarDayModel(isoDate = "2021-11-11T09:54:06.678+00:00"))
+        add(CalendarDayModel(isoDate = "2021-11-12T09:54:06.678+00:00"))
+        add(CalendarDayModel(isoDate = "2021-11-13T09:54:06.678+00:00"))
+        add(CalendarDayModel(isoDate = "2021-11-14T09:54:06.678+00:00"))
+        add(CalendarDayModel(isoDate = "2021-11-15T09:54:06.678+00:00"))
+        add(CalendarDayModel(isoDate = "2021-11-16T09:54:06.678+00:00"))
+        add(CalendarDayModel(isoDate = "2021-11-17T09:54:06.678+00:00"))
+        add(CalendarDayModel(isoDate = "2021-11-18T09:54:06.678+00:00"))
+        add(CalendarDayModel(isoDate = "2021-11-19T09:54:06.678+00:00"))
+        add(CalendarDayModel(isoDate = "2021-11-20T09:54:06.678+00:00"))
+        add(CalendarDayModel(isoDate = "2021-11-21T09:54:06.678+00:00"))
+        add(CalendarDayModel(isoDate = "2021-11-22T09:54:06.678+00:00"))
+        add(CalendarDayModel(isoDate = "2021-11-23T09:54:06.678+00:00"))
+        add(CalendarDayModel(isoDate = "2021-11-24T09:54:06.678+00:00"))
+        add(CalendarDayModel(isoDate = "2021-11-25T09:54:06.678+00:00"))
+        add(CalendarDayModel(isoDate = "2021-11-26T09:54:06.678+00:00"))
+        add(CalendarDayModel(isoDate = "2021-11-27T09:54:06.678+00:00"))
+        add(CalendarDayModel(isoDate = "2021-11-28T09:54:06.678+00:00"))
+        add(CalendarDayModel(isoDate = "2021-11-29T09:54:06.678+00:00"))
+        add(CalendarDayModel(isoDate = "2021-11-30T09:54:06.678+00:00"))
     }
 
 }

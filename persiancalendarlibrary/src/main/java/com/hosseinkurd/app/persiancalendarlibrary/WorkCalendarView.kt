@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.SnapHelper
 import com.hosseinkurd.app.persiancalendarlibrary.adapters.AbstractAdapter
@@ -12,9 +13,12 @@ import com.hosseinkurd.app.persiancalendarlibrary.adapters.WorkCalendarAdapter
 import com.hosseinkurd.app.persiancalendarlibrary.databinding.WorkCalendarViewBinding
 import com.hosseinkurd.app.persiancalendarlibrary.enums.EnumWorkCalendarState
 import com.hosseinkurd.app.persiancalendarlibrary.interfaces.OnClickListenerPersianCalendarLibrary
+import com.hosseinkurd.app.persiancalendarlibrary.models.CalendarDayModel
 import com.hosseinkurd.app.persiancalendarlibrary.models.WorkCalendarModel
 import com.hosseinkurd.app.persiancalendarlibrary.utils.PersianCalendarWrapper
+import com.hosseinkurd.app.persiancalendarlibrary.utils.twoDigitsPersianCalendarLibrary
 import java.text.DateFormat
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -39,15 +43,72 @@ class WorkCalendarView @JvmOverloads constructor(
         initializeListeners()
     }
 
-    fun addItems(list: MutableList<WorkCalendarModel>) {
-        context?.let {
-            binding.recyclerViewDay.adapter?.let { adapter ->
-                if (adapter is WorkCalendarAdapter) {
-                    adapter.items.addAll(list)
-                    adapter.notifyDataSetChanged()
+    fun addItems(
+        isoList: MutableList<CalendarDayModel>,
+        isoDatePattern: String = "yyyy-MM-dd"
+    ) {
+        adaptToView(convertToWorkCalendarModelList(isoList, isoDatePattern))
+    }
+
+    fun addItemsToFist(
+        isoList: MutableList<CalendarDayModel>,
+        isoDatePattern: String = "yyyy-MM-dd"
+    ) {
+        adaptToViewToFirst(convertToWorkCalendarModelList(isoList, isoDatePattern))
+    }
+
+    private fun convertToWorkCalendarModelList(
+        isoList: MutableList<CalendarDayModel>,
+        isoDatePattern: String
+    ): MutableList<WorkCalendarModel> {
+        val workCalendarModelList: MutableList<WorkCalendarModel> = mutableListOf()
+        isoList.forEach { item ->
+            var dayOfMonth: String? = null
+            var dayOfWeek: String? = null
+            val calendar = Calendar.getInstance(TimeZone.getDefault(), Locale.getDefault())
+            calendar.firstDayOfWeek = Calendar.SATURDAY
+            val dateFormat = SimpleDateFormat(isoDatePattern, Locale.getDefault())
+            try {
+                val date: Date? = dateFormat.parse(item.isoDate)
+                date?.let { dateAndTime ->
+                    calendar.time = dateAndTime
+                    dateFormat.parse(item.isoDate)?.let { dateItem ->
+                        dayOfMonth = PersianCalendarWrapper(dateItem.time).getPersianDay()
+                            .twoDigitsPersianCalendarLibrary()
+                    }
+                    context?.let {
+                        dayOfWeek = when (calendar.get(Calendar.DAY_OF_WEEK)) {
+                            Calendar.SATURDAY -> context.getString(R.string.saturday_persian_calendar_library)
+                            Calendar.SUNDAY -> context.getString(R.string.sunday_persian_calendar_library)
+                            Calendar.MONDAY -> context.getString(R.string.monday_persian_calendar_library)
+                            Calendar.TUESDAY -> context.getString(R.string.tuesday_persian_calendar_library)
+                            Calendar.WEDNESDAY -> context.getString(R.string.wednesday_persian_calendar_library)
+                            Calendar.THURSDAY -> context.getString(R.string.thursday_persian_calendar_library)
+                            else -> context.getString(R.string.friday_persian_calendar_library)
+                        }
+                    }
                 }
+            } catch (e: ParseException) {
+                e.printStackTrace()
+                dayOfMonth = "--"
+                dayOfWeek = "--"
             }
+            workCalendarModelList.add(
+                WorkCalendarModel(
+                    id = UUID.randomUUID().toString(),
+                    workCalendarState = getWorkCalendarStateByIsoDate(
+                        isoDate = item.isoDate,
+                        item.isReserved
+                    ),
+                    isoDate = item.isoDate,
+                    persianDate = getPersianDate(item.isoDate, isoDatePattern),
+                    isSelected = isToday(item.isoDate),
+                    dayOfMonth = dayOfMonth,
+                    dayOfWeek = dayOfWeek
+                )
+            )
         }
+        return workCalendarModelList
     }
 
     fun showSelectedDayTasks() {
@@ -71,11 +132,9 @@ class WorkCalendarView @JvmOverloads constructor(
                 val dateFormat: DateFormat =
                     SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())// yyyy-MM-dd'T'HH:mmZ
                 val nowAsString: String = dateFormat.format(Date())
-                println("123456 nowAsString : $nowAsString")
                 adapter.items.firstOrNull {
                     it.isoDate?.startsWith(nowAsString) ?: false
                 }?.let { item ->
-                    println("123456 item : $item")
                     val index = adapter.items.indexOf(item)
                     binding.recyclerViewDay.smoothScrollToPosition(index)
                     adapter.changeSelectedItem(item)
@@ -84,21 +143,42 @@ class WorkCalendarView @JvmOverloads constructor(
         }
     }
 
+    fun showNextWeek() {
+
+    }
+
+    fun showPastWeek() {
+
+    }
+
+    fun getFirstDayOfWeek(): WorkCalendarModel? {
+        binding.recyclerViewDay.adapter?.let { adapter ->
+            if (adapter is WorkCalendarAdapter) {
+                val findFirstCompletelyVisibleItemPosition =
+                    (binding.recyclerViewDay.layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition()
+                return adapter.items[findFirstCompletelyVisibleItemPosition]
+            }
+        }
+        return null
+    }
+
+    fun getLastDayOfWeek(): WorkCalendarModel? {
+        binding.recyclerViewDay.adapter?.let { adapter ->
+            if (adapter is WorkCalendarAdapter) {
+                val findLastCompletelyVisibleItemPosition =
+                    (binding.recyclerViewDay.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
+                return adapter.items[findLastCompletelyVisibleItemPosition]
+            }
+        }
+        return null
+    }
+
     fun changeSelectedItem(
         item: WorkCalendarModel,
     ) {
         binding.recyclerViewDay.adapter?.let { adapter ->
             if (adapter is WorkCalendarAdapter) adapter.changeSelectedItem(item)
         }
-    }
-
-    private fun getYearMonth(isoDate: String): String {
-        var persianYearMonth = ""
-        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SSS", Locale.getDefault())
-        format.parse(isoDate)?.let { date ->
-            persianYearMonth = PersianCalendarWrapper(date.time).getPersianYearMonth()
-        }
-        return persianYearMonth
     }
 
     private fun initializeView(attributeSet: AttributeSet? = null, defStyleAttr: Int) {
@@ -162,4 +242,93 @@ class WorkCalendarView @JvmOverloads constructor(
         }
     }
 
+    private fun getYearMonth(isoDate: String): String {
+        var persianYearMonth = ""
+        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SSS", Locale.getDefault())
+        format.parse(isoDate)?.let { date ->
+            persianYearMonth = PersianCalendarWrapper(date.time).getPersianYearMonth()
+        }
+        return persianYearMonth
+    }
+
+    private fun adaptToView(workCalendarModelList: MutableList<WorkCalendarModel>) {
+        binding.recyclerViewDay.adapter?.let { adapter ->
+            if (adapter is WorkCalendarAdapter) {
+                adapter.items.addAll(workCalendarModelList)
+                adapter.notifyDataSetChanged()
+            }
+        }
+    }
+
+    private fun adaptToViewToFirst(workCalendarModelList: MutableList<WorkCalendarModel>) {
+        binding.recyclerViewDay.adapter?.let { adapter ->
+            if (adapter is WorkCalendarAdapter) {
+                adapter.items.addAll(0, workCalendarModelList)
+                adapter.notifyDataSetChanged()
+            }
+        }
+    }
+
+    private fun getPersianDate(isoDate: String, isoDatePattern: String): String {
+        val calendar = Calendar.getInstance(TimeZone.getDefault(), Locale.getDefault())
+        calendar.firstDayOfWeek = Calendar.SATURDAY
+        val dateFormat = SimpleDateFormat(isoDatePattern, Locale.getDefault())
+        val date: Date? = dateFormat.parse(isoDate)
+        date?.let { dateAndTime ->
+            calendar.time = dateAndTime
+            dateFormat.parse(isoDate)?.let { dateItem ->
+                return PersianCalendarWrapper(dateItem.time).getPersianDate()
+            }
+        }
+        return ""
+    }
+
+    private fun getWorkCalendarStateByIsoDate(
+        isoDate: String,
+        isReserved: Boolean
+    ): EnumWorkCalendarState {
+        return when {
+            isToday(isoDate) -> EnumWorkCalendarState.TODAY
+            isReserved -> EnumWorkCalendarState.RESERVED_DAY
+            else -> EnumWorkCalendarState.NORMAL_DAY
+        }
+    }
+
+    private fun isToday(
+        isoDate: String,
+    ): Boolean {
+        val dateFormat: DateFormat =
+            SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())// yyyy-MM-dd'T'HH:mmZ
+        val nowAsString: String = dateFormat.format(Date())
+        return isoDate.startsWith(nowAsString)
+    }
+
 }
+
+/*adapter.items.forEachIndexed { index, workCalendarModel ->
+   if(workCalendarModel.isSelected) {
+       when(workCalendarModel.dayOfWeek){
+           context.getString(R.string.saturday_persian_calendar_library)->{
+
+           }
+           context.getString(R.string.sunday_persian_calendar_library)->{
+
+           }
+           context.getString(R.string.monday_persian_calendar_library)->{
+
+           }
+           context.getString(R.string.tuesday_persian_calendar_library)->{
+
+           }
+           context.getString(R.string.wednesday_persian_calendar_library)->{
+
+           }
+           context.getString(R.string.thursday_persian_calendar_library)->{
+
+           }
+           context.getString(R.string.friday_persian_calendar_library)->{
+
+           }
+       }
+   }
+}*/

@@ -18,4 +18,36 @@
         app:weekCalendarBackgroundStart="@drawable/dr_click"
         app:weekCalendarSrcEnd="@drawable/ic_arrow_end" />
 
+    <Button
+        android:id="@+id/buttonGoToToday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?attr/selectableItemBackground"
+        android:text="@string/go_to_today"
+        app:layout_constraintTop_toBottomOf="@id/workCalendarView" />
+
+    <Button
+        android:id="@+id/buttonGoToSelected"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?attr/selectableItemBackground"
+        android:text="@string/go_to_selected_day"
+        app:layout_constraintTop_toBottomOf="@id/buttonGoToToday" />
+
+    <Button
+        android:id="@+id/buttonFirstDayInView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?attr/selectableItemBackground"
+        android:text="@string/first_day_in_view"
+        app:layout_constraintTop_toBottomOf="@id/buttonGoToSelected" />
+
+    <Button
+        android:id="@+id/buttonLastDayInView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?attr/selectableItemBackground"
+        android:text="@string/last_day_in_view"
+        app:layout_constraintTop_toBottomOf="@id/buttonFirstDayInView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
