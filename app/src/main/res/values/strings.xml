@@ -4,4 +4,6 @@
     <string name="go_to_selected_day">Go to Selected day</string>
     <string name="first_day_in_view">First day in view</string>
     <string name="last_day_in_view">Last day in view</string>
+    <string name="show_next_week">Show Next Week</string>
+    <string name="show_past_week">Show Past Week</string>
 </resources>

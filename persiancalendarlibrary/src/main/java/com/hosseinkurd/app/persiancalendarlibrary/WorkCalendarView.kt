@@ -145,11 +145,31 @@ class WorkCalendarView @JvmOverloads constructor(
     }
 
     fun showNextWeek() {
-
+        val lastDayOfWeek = getLastDayOfWeek()
+        lastDayOfWeek?.let { workCalendarModel ->
+            binding.recyclerViewDay.adapter?.let { adapter ->
+                if (adapter is WorkCalendarAdapter) {
+                    var lastDayOfWeekIndex = adapter.items.indexOf(workCalendarModel)
+                    if (lastDayOfWeekIndex + 7 >= adapter.items.size)
+                        lastDayOfWeekIndex = adapter.items.size
+                    binding.recyclerViewDay.smoothScrollToPosition(lastDayOfWeekIndex)
+                }
+            }
+        }
     }
 
     fun showPastWeek() {
-
+        val firstDayOfWeek = getFirstDayOfWeek()
+        firstDayOfWeek?.let { workCalendarModel ->
+            binding.recyclerViewDay.adapter?.let { adapter ->
+                if (adapter is WorkCalendarAdapter) {
+                    var lastDayOfWeekIndex = adapter.items.indexOf(workCalendarModel)
+                    if (lastDayOfWeekIndex - 7 < 0)
+                        lastDayOfWeekIndex = adapter.items.size
+                    binding.recyclerViewDay.smoothScrollToPosition(lastDayOfWeekIndex)
+                }
+            }
+        }
     }
 
     fun getFirstDayOfWeek(): WorkCalendarModel? {
@@ -237,9 +257,13 @@ class WorkCalendarView @JvmOverloads constructor(
 
     private fun initializeListeners() {
         binding.imageViewStart.setOnClickListener {
+            println("imageViewStart >> setOnClickListener")
+            showPastWeek()
             onClickListenerPersianCalendarLibrary?.onPersianCalendarLibraryStartClicked()
         }
         binding.imageViewEnd.setOnClickListener {
+            println("imageViewEnd >> setOnClickListener")
+            showNextWeek()
             onClickListenerPersianCalendarLibrary?.onPersianCalendarLibraryEndClicked()
         }
         binding.recyclerViewDay.adapter?.let { adapter ->
@@ -266,7 +290,7 @@ class WorkCalendarView @JvmOverloads constructor(
 
     private fun getYearMonth(isoDate: String): String {
         var persianYearMonth = ""
-        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SSS", Locale.getDefault())
+        val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         format.parse(isoDate)?.let { date ->
             persianYearMonth = PersianCalendarWrapper(date.time).getPersianYearMonth()
         }

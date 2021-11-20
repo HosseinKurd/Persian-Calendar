@@ -57,11 +57,11 @@ class MainActivity : AppCompatActivity() {
         workCalendarView.onClickListenerPersianCalendarLibrary =
             object : OnClickListenerPersianCalendarLibrary {
                 override fun onPersianCalendarLibraryStartClicked() {
-
+                    println("onClickListenerPersianCalendarLibrary >> onPersianCalendarLibraryStartClicked")
                 }
 
                 override fun onPersianCalendarLibraryEndClicked() {
-
+                    println("onClickListenerPersianCalendarLibrary >> onPersianCalendarLibraryEndClicked")
                 }
 
                 override fun onPersianCalendarLibraryClicked(

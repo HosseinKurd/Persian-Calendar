@@ -50,4 +50,20 @@
         android:text="@string/last_day_in_view"
         app:layout_constraintTop_toBottomOf="@id/buttonFirstDayInView" />
 
+    <Button
+        android:id="@+id/buttonNextWeek"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?attr/selectableItemBackground"
+        android:text="@string/show_next_week"
+        app:layout_constraintTop_toBottomOf="@id/buttonLastDayInView" />
+
+    <Button
+        android:id="@+id/buttonPastWeek"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?attr/selectableItemBackground"
+        android:text="@string/show_past_week"
+        app:layout_constraintTop_toBottomOf="@id/buttonNextWeek" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
