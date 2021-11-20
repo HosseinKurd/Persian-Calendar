@@ -71,11 +71,14 @@ class WorkCalendarView @JvmOverloads constructor(
                 val dateFormat: DateFormat =
                     SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())// yyyy-MM-dd'T'HH:mmZ
                 val nowAsString: String = dateFormat.format(Date())
+                println("123456 nowAsString : $nowAsString")
                 adapter.items.firstOrNull {
                     it.isoDate?.startsWith(nowAsString) ?: false
                 }?.let { item ->
+                    println("123456 item : $item")
                     val index = adapter.items.indexOf(item)
                     binding.recyclerViewDay.smoothScrollToPosition(index)
+                    adapter.changeSelectedItem(item)
                 }
             }
         }

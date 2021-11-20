@@ -2,6 +2,7 @@ package com.hosseinkurd.app.persiancalendarlibrary.models
 
 import android.os.Parcelable
 import com.hosseinkurd.app.persiancalendarlibrary.enums.EnumWorkCalendarState
+import com.hosseinkurd.app.persiancalendarlibrary.utils.PersianCalendarWrapper
 import com.hosseinkurd.app.persiancalendarlibrary.utils.twoDigitsPersianCalendarLibrary
 import kotlinx.parcelize.Parcelize
 import java.text.ParseException
@@ -29,8 +30,10 @@ class WorkCalendarModel(
                 val date: Date? = dateFormat.parse(isoDateAndTime)
                 date?.let { dateAndTime ->
                     calendar.time = dateAndTime
-                    // TODO: 11/10/2021 Define in Calendar wrapper
-                    dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH).twoDigitsPersianCalendarLibrary()
+                    val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SSS", Locale.getDefault())
+                    format.parse(isoDate)?.let { date ->
+                        dayOfMonth = PersianCalendarWrapper(date.time).getPersianDay().twoDigitsPersianCalendarLibrary()
+                    }
                     dayOfWeek = when (calendar.get(Calendar.DAY_OF_WEEK)) {
                         Calendar.SATURDAY -> "شنبه"
                         Calendar.SUNDAY -> "یکشنبه"
