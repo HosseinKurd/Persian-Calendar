@@ -199,7 +199,7 @@ class PersianCalendarWrapper {
      * @return String
      */
     fun getPersianDate(): String {
-        return "$irYear$separatorJalali$irMonth$separatorJalali$irDay"
+        return "$irYear$separatorJalali${irMonth.twoDigitsPersianCalendarLibrary()}$separatorJalali${irDay.twoDigitsPersianCalendarLibrary()}"
     }
 
     /**
@@ -209,7 +209,7 @@ class PersianCalendarWrapper {
      * @return String
      */
     fun getGregorianDate(): String {
-        return "$gYear$separator$gMonth$separator$gDay"
+        return "$gYear$separator${gMonth.twoDigitsPersianCalendarLibrary()}$separator${gDay.twoDigitsPersianCalendarLibrary()}"
     }
 
     /**
@@ -219,7 +219,7 @@ class PersianCalendarWrapper {
      * @return String
      */
     fun getJulianDate(): String {
-        return "$juYear$separator$juMonth$separator$juDay"
+        return "$juYear$separator${juMonth.twoDigitsPersianCalendarLibrary()}$separator${juDay.twoDigitsPersianCalendarLibrary()}"
     }
 
     /**

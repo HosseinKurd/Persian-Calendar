@@ -7,6 +7,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
 import com.hosseinkurd.app.persiancalendarlibrary.adapters.AbstractAdapter
 import com.hosseinkurd.app.persiancalendarlibrary.adapters.WorkCalendarAdapter
@@ -181,6 +182,15 @@ class WorkCalendarView @JvmOverloads constructor(
         }
     }
 
+    fun changeItemState(
+        isoDate: String,
+        workCalendarState: EnumWorkCalendarState = EnumWorkCalendarState.NORMAL_DAY
+    ) {
+        binding.recyclerViewDay.adapter?.let { adapter ->
+            if (adapter is WorkCalendarAdapter) adapter.changeItemState(isoDate, workCalendarState)
+        }
+    }
+
     private fun initializeView(attributeSet: AttributeSet? = null, defStyleAttr: Int) {
         if (attributeSet != null) {
             val typedArray = context.obtainStyledAttributes(
@@ -240,6 +250,18 @@ class WorkCalendarView @JvmOverloads constructor(
                     }
                 }
         }
+        binding.recyclerViewDay.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                println("OnScrollListener >> onScrollStateChanged >> newState : $newState")
+                if (RecyclerView.SCROLL_STATE_IDLE == newState) {
+                    onClickListenerPersianCalendarLibrary?.onPersianCalendarLibraryScrolled(
+                        firstWorkCalendarModel = getFirstDayOfWeek(),
+                        lastWorkCalendarModel = getLastDayOfWeek()
+                    )
+                }
+            }
+        })
     }
 
     private fun getYearMonth(isoDate: String): String {

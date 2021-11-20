@@ -6,4 +6,5 @@ interface OnClickListenerPersianCalendarLibrary {
     fun onPersianCalendarLibraryStartClicked()
     fun onPersianCalendarLibraryEndClicked()
     fun onPersianCalendarLibraryClicked(workCalendarModel: WorkCalendarModel)
+    fun onPersianCalendarLibraryScrolled(firstWorkCalendarModel: WorkCalendarModel?, lastWorkCalendarModel: WorkCalendarModel?)
 }

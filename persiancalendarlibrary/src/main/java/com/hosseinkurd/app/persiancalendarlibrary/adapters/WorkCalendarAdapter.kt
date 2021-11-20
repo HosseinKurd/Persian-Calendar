@@ -62,15 +62,26 @@ class WorkCalendarAdapter(
     }
 
     fun changeSelectedItem(
-        item: WorkCalendarModel,
+        newItem: WorkCalendarModel,
     ) {
         items.firstOrNull { it.isSelected }
             ?.let {
                 it.isSelected = false
                 notifyItemChanged(items.indexOf(it))
             }
-        item.isSelected = true
-        notifyItemChanged(items.indexOf(item))
+        newItem.isSelected = true
+        notifyItemChanged(items.indexOf(newItem))
+    }
+
+    fun changeItemState(
+        isoDate: String,
+        workCalendarState: EnumWorkCalendarState = EnumWorkCalendarState.NORMAL_DAY
+    ) {
+        items.firstOrNull { it.isoDate == isoDate }
+            ?.let {
+                it.workCalendarState = workCalendarState
+                notifyItemChanged(items.indexOf(it))
+            }
     }
 
     inner class ViewHolderWorkCalendarNormal(private val binding: ItemWorkCalendarNormalBinding) :
