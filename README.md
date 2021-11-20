@@ -28,7 +28,15 @@ Step 2. Add the dependency
 
 # XML:
 
-
+    <com.hosseinkurd.app.persiancalendarlibrary.WorkCalendarView
+        android:id="@+id/workCalendarView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:dayListMarginTop="0dp"
+        app:weekCalendarBackgroundStart="@drawable/dr_click"
+        app:weekCalendarBackgroundEnd="@drawable/dr_click"
+        app:weekCalendarSrcStart="@drawable/ic_arrow_start"
+        app:weekCalendarSrcEnd="@drawable/ic_arrow_end" />
 
 # Change Resources:
 
