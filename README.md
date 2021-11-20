@@ -32,7 +32,7 @@ Step 2. Add the dependency
 
 # Change Resources:
 
-add and modify colors at colors.xml and drawable at res/ to what you expect
+add and modify dimensions at dimen.xml and colors at colors.xml and drawable at res/drawable to what you expect
 
 Special thanks [Hamidreza Amuzadeh](https://github.com/HamidrezaAmz "Hamidreza Amoozadeh")
 
