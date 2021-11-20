@@ -31,7 +31,7 @@ class WorkCalendarModel(
                 date?.let { dateAndTime ->
                     calendar.time = dateAndTime
                     val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SSS", Locale.getDefault())
-                    format.parse(isoDate)?.let { date ->
+                    format.parse(isoDateAndTime)?.let { date ->
                         dayOfMonth = PersianCalendarWrapper(date.time).getPersianDay().twoDigitsPersianCalendarLibrary()
                     }
                     dayOfWeek = when (calendar.get(Calendar.DAY_OF_WEEK)) {
