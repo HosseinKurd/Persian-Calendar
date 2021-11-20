@@ -1,7 +1,10 @@
 package com.hosseinkurd.app.persiancalendar
 
 import android.os.Bundle
+import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.bottomappbar.BottomAppBar
 import com.hosseinkurd.app.persiancalendarlibrary.WorkCalendarView
 import com.hosseinkurd.app.persiancalendarlibrary.interfaces.OnClickListenerPersianCalendarLibrary
 import com.hosseinkurd.app.persiancalendarlibrary.models.CalendarDayModel
@@ -32,14 +35,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initInterface() {
+        findViewById<Button>(R.id.buttonGoToToday).setOnClickListener {
+            workCalendarView.showTodayTasks()
+        }
+        findViewById<Button>(R.id.buttonGoToSelected).setOnClickListener {
+            workCalendarView.showSelectedDayTasks()
+        }
+        findViewById<Button>(R.id.buttonFirstDayInView).setOnClickListener {
+            Toast.makeText(this, "First Day In View : '${workCalendarView.getFirstDayOfWeek()?.persianDate}'", Toast.LENGTH_LONG).show()
+        }
+        findViewById<Button>(R.id.buttonLastDayInView).setOnClickListener {
+            Toast.makeText(this, "Last Day In View : '${workCalendarView.getLastDayOfWeek()?.persianDate}'", Toast.LENGTH_LONG).show()
+        }
         workCalendarView.onClickListenerPersianCalendarLibrary =
             object : OnClickListenerPersianCalendarLibrary {
                 override fun onPersianCalendarLibraryStartClicked() {
-                    workCalendarView.showTodayTasks()
+
                 }
 
                 override fun onPersianCalendarLibraryEndClicked() {
-                    workCalendarView.showSelectedDayTasks()
+
                 }
 
                 override fun onPersianCalendarLibraryClicked(

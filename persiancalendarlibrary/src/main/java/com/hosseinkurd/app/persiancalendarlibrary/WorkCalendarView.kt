@@ -115,7 +115,7 @@ class WorkCalendarView @JvmOverloads constructor(
         binding.recyclerViewDay.adapter?.let { adapter ->
             if (adapter is WorkCalendarAdapter) {
                 adapter.items.firstOrNull {
-                    it.workCalendarState == EnumWorkCalendarState.TODAY
+                    it.isSelected
                 }?.let { item ->
                     val index = adapter.items.indexOf(item)
                     binding.recyclerViewDay.smoothScrollToPosition(index)
@@ -155,7 +155,7 @@ class WorkCalendarView @JvmOverloads constructor(
         binding.recyclerViewDay.adapter?.let { adapter ->
             if (adapter is WorkCalendarAdapter) {
                 val findFirstCompletelyVisibleItemPosition =
-                    (binding.recyclerViewDay.layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition()
+                    (binding.recyclerViewDay.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
                 return adapter.items[findFirstCompletelyVisibleItemPosition]
             }
         }
@@ -166,7 +166,7 @@ class WorkCalendarView @JvmOverloads constructor(
         binding.recyclerViewDay.adapter?.let { adapter ->
             if (adapter is WorkCalendarAdapter) {
                 val findLastCompletelyVisibleItemPosition =
-                    (binding.recyclerViewDay.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
+                    (binding.recyclerViewDay.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
                 return adapter.items[findLastCompletelyVisibleItemPosition]
             }
         }
