@@ -5,7 +5,7 @@ import java.util.*
 /**
  * Created by Kurdia on 4/15/17.
  */
-class PersianCalendarWrapper {
+class PersianCalendarConvertor {
 
     var separator = "-"
 

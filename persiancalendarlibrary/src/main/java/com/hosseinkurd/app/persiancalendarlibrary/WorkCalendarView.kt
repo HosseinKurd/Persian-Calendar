@@ -16,7 +16,9 @@ import com.hosseinkurd.app.persiancalendarlibrary.enums.EnumWorkCalendarState
 import com.hosseinkurd.app.persiancalendarlibrary.interfaces.OnClickListenerPersianCalendarLibrary
 import com.hosseinkurd.app.persiancalendarlibrary.models.CalendarDayModel
 import com.hosseinkurd.app.persiancalendarlibrary.models.WorkCalendarModel
-import com.hosseinkurd.app.persiancalendarlibrary.utils.PersianCalendarWrapper
+import com.hosseinkurd.app.persiancalendarlibrary.utils.PersianCalendarConvertor
+import com.hosseinkurd.app.persiancalendarlibrary.utils.PublicFunctions
+import com.hosseinkurd.app.persiancalendarlibrary.utils.PublicValues
 import com.hosseinkurd.app.persiancalendarlibrary.utils.twoDigitsPersianCalendarLibrary
 import java.text.DateFormat
 import java.text.ParseException
@@ -33,6 +35,7 @@ class WorkCalendarView @JvmOverloads constructor(
     attributeSet,
     defStyleAttr
 ) {
+    var autoIncreaseDays = true
     private var binding: WorkCalendarViewBinding
     var onClickListenerPersianCalendarLibrary: OnClickListenerPersianCalendarLibrary? = null
 
@@ -46,14 +49,14 @@ class WorkCalendarView @JvmOverloads constructor(
 
     fun addItems(
         isoList: MutableList<CalendarDayModel>,
-        isoDatePattern: String = "yyyy-MM-dd"
+        isoDatePattern: String = PublicValues.PATTERN_YYYY_MM_dd
     ) {
         adaptToView(convertToWorkCalendarModelList(isoList, isoDatePattern))
     }
 
     fun addItemsToFist(
         isoList: MutableList<CalendarDayModel>,
-        isoDatePattern: String = "yyyy-MM-dd"
+        isoDatePattern: String = PublicValues.PATTERN_YYYY_MM_dd
     ) {
         adaptToViewToFirst(convertToWorkCalendarModelList(isoList, isoDatePattern))
     }
@@ -74,7 +77,7 @@ class WorkCalendarView @JvmOverloads constructor(
                 date?.let { dateAndTime ->
                     calendar.time = dateAndTime
                     dateFormat.parse(item.isoDate)?.let { dateItem ->
-                        dayOfMonth = PersianCalendarWrapper(dateItem.time).getPersianDay()
+                        dayOfMonth = PersianCalendarConvertor(dateItem.time).getPersianDay()
                             .twoDigitsPersianCalendarLibrary()
                     }
                     context?.let {
@@ -119,7 +122,7 @@ class WorkCalendarView @JvmOverloads constructor(
                     it.isSelected
                 }?.let { item ->
                     val index = adapter.items.indexOf(item)
-                    binding.recyclerViewDay.smoothScrollToPosition(index)
+                    binding.recyclerViewDay.scrollToPosition(index)
                     binding.textViewTitle.text = getYearMonth(item.isoDate!!)
                 }
             }
@@ -131,13 +134,16 @@ class WorkCalendarView @JvmOverloads constructor(
         binding.recyclerViewDay.adapter?.let { adapter ->
             if (adapter is WorkCalendarAdapter) {
                 val dateFormat: DateFormat =
-                    SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())// yyyy-MM-dd'T'HH:mmZ
+                    SimpleDateFormat(
+                        PublicValues.PATTERN_YYYY_MM_dd,
+                        Locale.getDefault()
+                    )// yyyy-MM-dd'T'HH:mmZ
                 val nowAsString: String = dateFormat.format(Date())
                 adapter.items.firstOrNull {
                     it.isoDate?.startsWith(nowAsString) ?: false
                 }?.let { item ->
                     val index = adapter.items.indexOf(item)
-                    binding.recyclerViewDay.smoothScrollToPosition(index)
+                    binding.recyclerViewDay.scrollToPosition(index)
                     adapter.changeSelectedItem(item)
                     binding.textViewTitle.text = getYearMonth(item.isoDate!!)
                 }
@@ -153,7 +159,7 @@ class WorkCalendarView @JvmOverloads constructor(
                 if (lastDayOfWeekIndex >= adapter.itemCount) {
                     lastDayOfWeekIndex = adapter.itemCount
                 }
-                binding.recyclerViewDay.smoothScrollToPosition(lastDayOfWeekIndex)
+                binding.recyclerViewDay.scrollToPosition(lastDayOfWeekIndex)
             }
         }
     }
@@ -165,7 +171,7 @@ class WorkCalendarView @JvmOverloads constructor(
                     (binding.recyclerViewDay.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition() - 7
                 if (firstDayOfWeekIndex < 0)
                     firstDayOfWeekIndex = 0
-                binding.recyclerViewDay.smoothScrollToPosition(firstDayOfWeekIndex)
+                binding.recyclerViewDay.scrollToPosition(firstDayOfWeekIndex)
             }
         }
     }
@@ -173,9 +179,9 @@ class WorkCalendarView @JvmOverloads constructor(
     fun getFirstDayOfWeek(): WorkCalendarModel? {
         binding.recyclerViewDay.adapter?.let { adapter ->
             if (adapter is WorkCalendarAdapter) {
+                if (adapter.itemCount == 0) return null
                 val findFirstVisibleItemPosition =
                     (binding.recyclerViewDay.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
-                println("getFirstDayOfWeek >> findFirstVisibleItemPosition : $findFirstVisibleItemPosition")
                 return adapter.getItem(position = findFirstVisibleItemPosition)
             }
         }
@@ -185,9 +191,9 @@ class WorkCalendarView @JvmOverloads constructor(
     fun getLastDayOfWeek(): WorkCalendarModel? {
         binding.recyclerViewDay.adapter?.let { adapter ->
             if (adapter is WorkCalendarAdapter) {
+                if (adapter.itemCount == 0) return null
                 val findLastVisibleItemPosition =
                     (binding.recyclerViewDay.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
-                println("getLastDayOfWeek >> findLastVisibleItemPosition : $findLastVisibleItemPosition")
                 return adapter.getItem(position = findLastVisibleItemPosition)
             }
         }
@@ -212,7 +218,8 @@ class WorkCalendarView @JvmOverloads constructor(
     }
 
     private fun initializeView(attributeSet: AttributeSet? = null, defStyleAttr: Int) {
-        var reverseDayList: Boolean = false
+        var reverseDayList = false
+        var autoGenerateDays = false
         if (attributeSet != null) {
             val typedArray = context.obtainStyledAttributes(
                 attributeSet,
@@ -239,6 +246,12 @@ class WorkCalendarView @JvmOverloads constructor(
             reverseDayList = typedArray.getBoolean(
                 R.styleable.WorkCalendarView_reverseDayList, false
             )
+            autoGenerateDays = typedArray.getBoolean(
+                R.styleable.WorkCalendarView_autoGenerateDays, false
+            )
+            autoIncreaseDays = typedArray.getBoolean(
+                R.styleable.WorkCalendarView_autoIncreaseDays, true
+            )
             (binding.recyclerViewDay.layoutParams as MarginLayoutParams).setMargins(
                 0,
                 dayListMarginTop.toInt(),
@@ -252,7 +265,6 @@ class WorkCalendarView @JvmOverloads constructor(
         }
         binding.recyclerViewDay.setHasFixedSize(true)
         context?.let {
-            println("reverseDayList : $reverseDayList")
             binding.recyclerViewDay.layoutManager =
                 LinearLayoutManager(it, LinearLayoutManager.HORIZONTAL, reverseDayList)
             binding.recyclerViewDay.adapter =
@@ -260,16 +272,15 @@ class WorkCalendarView @JvmOverloads constructor(
         }
         val snapHelper: SnapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(binding.recyclerViewDay)
+        if (autoGenerateDays) generateCalendarDays()
     }
 
     private fun initializeListeners() {
         binding.imageViewStart.setOnClickListener {
-            println("imageViewStart >> setOnClickListener")
             showPastWeek()
             onClickListenerPersianCalendarLibrary?.onPersianCalendarLibraryStartClicked()
         }
         binding.imageViewEnd.setOnClickListener {
-            println("imageViewEnd >> setOnClickListener")
             showNextWeek()
             onClickListenerPersianCalendarLibrary?.onPersianCalendarLibraryEndClicked()
         }
@@ -286,6 +297,8 @@ class WorkCalendarView @JvmOverloads constructor(
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (RecyclerView.SCROLL_STATE_IDLE == newState) {
+//                    checkForPreviousDays()
+//                    checkFoNextDays()
                     onClickListenerPersianCalendarLibrary?.onPersianCalendarLibraryScrolled(
                         firstWorkCalendarModel = getFirstDayOfWeek(),
                         lastWorkCalendarModel = getLastDayOfWeek()
@@ -295,11 +308,79 @@ class WorkCalendarView @JvmOverloads constructor(
         })
     }
 
+    private fun checkForPreviousDays() {
+        if (autoIncreaseDays.not()) return
+        binding.recyclerViewDay.adapter?.let { adapter ->
+            if (adapter is WorkCalendarAdapter) {
+                if ((binding.recyclerViewDay.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition() <= 10) {
+                    adapter.getItem(position = 0).isoDate?.let { isoDate ->
+                        PublicFunctions.getCalendarFromISO(isoDate, PublicValues.PATTERN_YYYY_MM_dd)
+                            ?.let { calendar ->
+                                val items = mutableListOf<CalendarDayModel>()
+                                val dateFormat = SimpleDateFormat(
+                                    PublicValues.PATTERN_YYYY_MM_dd,
+                                    Locale.getDefault()
+                                )
+                                for (i in -30..-1) {
+                                    calendar.add(Calendar.DATE, -1)
+                                    val day = dateFormat.format(calendar.time)
+                                    items.add(CalendarDayModel(isoDate = day))
+                                    println("day : $day")
+                                }
+                                addItemsToFist(items)
+                            }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun checkFoNextDays() {
+        if (autoIncreaseDays.not()) return
+        binding.recyclerViewDay.adapter?.let { adapter ->
+            if (adapter is WorkCalendarAdapter) {
+                if ((binding.recyclerViewDay.layoutManager as LinearLayoutManager).findLastVisibleItemPosition() >= adapter.itemCount - 10) {
+                    adapter.getItem(position = adapter.itemCount - 1).isoDate?.let { isoDate ->
+                        PublicFunctions.getCalendarFromISO(isoDate, PublicValues.PATTERN_YYYY_MM_dd)
+                            ?.let { calendar ->
+                                val items = mutableListOf<CalendarDayModel>()
+                                val dateFormat = SimpleDateFormat(
+                                    PublicValues.PATTERN_YYYY_MM_dd,
+                                    Locale.getDefault()
+                                )
+                                for (i in 1..30) {
+                                    calendar.add(Calendar.DATE, 1)
+                                    val day = dateFormat.format(calendar.time)
+                                    items.add(CalendarDayModel(isoDate = day))
+                                }
+                                addItemsToFist(items)
+                            }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun generateCalendarDays() {
+        val items = mutableListOf<CalendarDayModel>()
+        val dateFormat = SimpleDateFormat(PublicValues.PATTERN_YYYY_MM_dd, Locale.getDefault())
+        for (i in -60..60) {
+            val calendar = Calendar.getInstance()
+            calendar.add(Calendar.DATE, i)
+            val day = dateFormat.format(calendar.time)
+            items.add(CalendarDayModel(isoDate = day))
+        }
+//        items = items.distinctBy { it.isoDate }.toMutableList()
+//        items.sortBy { it.isoDate }
+        addItems(items)
+        showTodayTasks()
+    }
+
     private fun getYearMonth(isoDate: String): String {
         var persianYearMonth = ""
-        val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val format = SimpleDateFormat(PublicValues.PATTERN_YYYY_MM_dd, Locale.getDefault())
         format.parse(isoDate)?.let { date ->
-            persianYearMonth = PersianCalendarWrapper(date.time).getPersianYearMonth()
+            persianYearMonth = PersianCalendarConvertor(date.time).getPersianYearMonth()
         }
         return persianYearMonth
     }
@@ -320,7 +401,7 @@ class WorkCalendarView @JvmOverloads constructor(
         binding.recyclerViewDay.adapter?.let { adapter ->
             if (adapter is WorkCalendarAdapter) {
                 adapter.items.addAll(0, workCalendarModelList)
-                adapter.notifyDataSetChanged()
+                adapter.notifyItemRangeInserted(0, workCalendarModelList.size)
             }
         }
     }
@@ -333,7 +414,7 @@ class WorkCalendarView @JvmOverloads constructor(
         date?.let { dateAndTime ->
             calendar.time = dateAndTime
             dateFormat.parse(isoDate)?.let { dateItem ->
-                return PersianCalendarWrapper(dateItem.time).getPersianDate()
+                return PersianCalendarConvertor(dateItem.time).getPersianDate()
             }
         }
         return ""
@@ -354,37 +435,12 @@ class WorkCalendarView @JvmOverloads constructor(
         isoDate: String,
     ): Boolean {
         val dateFormat: DateFormat =
-            SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())// yyyy-MM-dd'T'HH:mmZ
+            SimpleDateFormat(
+                PublicValues.PATTERN_YYYY_MM_dd,
+                Locale.getDefault()
+            )
         val nowAsString: String = dateFormat.format(Date())
         return isoDate.startsWith(nowAsString)
     }
 
 }
-
-/*adapter.items.forEachIndexed { index, workCalendarModel ->
-   if(workCalendarModel.isSelected) {
-       when(workCalendarModel.dayOfWeek){
-           context.getString(R.string.saturday_persian_calendar_library)->{
-
-           }
-           context.getString(R.string.sunday_persian_calendar_library)->{
-
-           }
-           context.getString(R.string.monday_persian_calendar_library)->{
-
-           }
-           context.getString(R.string.tuesday_persian_calendar_library)->{
-
-           }
-           context.getString(R.string.wednesday_persian_calendar_library)->{
-
-           }
-           context.getString(R.string.thursday_persian_calendar_library)->{
-
-           }
-           context.getString(R.string.friday_persian_calendar_library)->{
-
-           }
-       }
-   }
-}*/

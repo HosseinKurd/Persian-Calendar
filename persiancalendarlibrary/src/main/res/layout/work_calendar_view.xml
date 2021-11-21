@@ -6,7 +6,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout_parent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="@dimen/padding_medium_persian_calendar_library">
 
         <ImageView
             android:id="@+id/imageView_start"
@@ -25,10 +26,10 @@
         <TextView
             android:id="@+id/textView_title"
             style="@style/AppTheme.TextView.Title"
-            android:textDirection="rtl"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:gravity="center"
+            android:textDirection="rtl"
             android:textSize="@dimen/text_size_title"
             app:layout_constraintEnd_toStartOf="@+id/imageView_end"
             app:layout_constraintStart_toEndOf="@+id/imageView_start"
