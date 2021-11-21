@@ -139,6 +139,7 @@ class WorkCalendarView @JvmOverloads constructor(
                     val index = adapter.items.indexOf(item)
                     binding.recyclerViewDay.smoothScrollToPosition(index)
                     adapter.changeSelectedItem(item)
+                    binding.textViewTitle.text = getYearMonth(item.isoDate!!)
                 }
             }
         }
@@ -235,6 +236,9 @@ class WorkCalendarView @JvmOverloads constructor(
             val weekCalendarSrcEnd = typedArray.getDrawable(
                 R.styleable.WorkCalendarView_weekCalendarSrcEnd,
             )
+            val reverseDayList = typedArray.getBoolean(
+                R.styleable.WorkCalendarView_reverseDayList, false
+            )
             (binding.recyclerViewDay.layoutParams as MarginLayoutParams).setMargins(
                 0,
                 dayListMarginTop.toInt(),
@@ -245,6 +249,10 @@ class WorkCalendarView @JvmOverloads constructor(
             weekCalendarBackgroundEnd?.let { binding.imageViewEnd.background = it }
             weekCalendarSrcStart?.let { binding.imageViewStart.setImageDrawable(it) }
             weekCalendarSrcEnd?.let { binding.imageViewEnd.setImageDrawable(it) }
+            context?.let {
+                binding.recyclerViewDay.layoutManager =
+                    LinearLayoutManager(it, LinearLayoutManager.HORIZONTAL, reverseDayList)
+            }
         }
         binding.recyclerViewDay.setHasFixedSize(true)
         context?.let {
@@ -271,6 +279,7 @@ class WorkCalendarView @JvmOverloads constructor(
                 object : AbstractAdapter.OnItemClickListener<WorkCalendarModel> {
                     override fun onClicked(actionId: Int, position: Int, item: WorkCalendarModel) {
                         onClickListenerPersianCalendarLibrary?.onPersianCalendarLibraryClicked(item)
+                        binding.textViewTitle.text = getYearMonth(item.isoDate!!)
                     }
                 }
         }
@@ -292,12 +301,16 @@ class WorkCalendarView @JvmOverloads constructor(
         var persianYearMonth = ""
         val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         format.parse(isoDate)?.let { date ->
+            println("isoDate : $isoDate , getMonthPersianStr :  ${PersianCalendarWrapper(date.time).getMonthPersianStr()}")
             persianYearMonth = PersianCalendarWrapper(date.time).getPersianYearMonth()
         }
         return persianYearMonth
     }
 
     private fun adaptToView(workCalendarModelList: MutableList<WorkCalendarModel>) {
+        workCalendarModelList.firstOrNull { it.isSelected }?.let {
+            binding.textViewTitle.text = getYearMonth(it.isoDate!!)
+        }
         binding.recyclerViewDay.adapter?.let { adapter ->
             if (adapter is WorkCalendarAdapter) {
                 adapter.items.addAll(workCalendarModelList)

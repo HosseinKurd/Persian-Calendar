@@ -117,12 +117,14 @@ Set interface for desired actions
 
     <com.hosseinkurd.app.persiancalendarlibrary.WorkCalendarView
         android:id="@+id/workCalendarView"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:reverseDayList="true"
         app:dayListMarginTop="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:weekCalendarBackgroundStart="@drawable/dr_click"
-        app:weekCalendarBackgroundEnd="@drawable/dr_click"
-        app:weekCalendarSrcStart="@drawable/ic_arrow_start"
         app:weekCalendarSrcEnd="@drawable/ic_arrow_end" />
 
 # Change Resources:
