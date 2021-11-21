@@ -54,14 +54,20 @@ class MainActivity : AppCompatActivity() {
                 Toast.LENGTH_LONG
             ).show()
         }
+        findViewById<Button>(R.id.buttonNextWeek).setOnClickListener {
+            workCalendarView.showNextWeek()
+        }
+        findViewById<Button>(R.id.buttonPastWeek).setOnClickListener {
+            workCalendarView.showPastWeek()
+        }
         workCalendarView.onClickListenerPersianCalendarLibrary =
             object : OnClickListenerPersianCalendarLibrary {
                 override fun onPersianCalendarLibraryStartClicked() {
-                    println("onClickListenerPersianCalendarLibrary >> onPersianCalendarLibraryStartClicked")
+
                 }
 
                 override fun onPersianCalendarLibraryEndClicked() {
-                    println("onClickListenerPersianCalendarLibrary >> onPersianCalendarLibraryEndClicked+")
+
                 }
 
                 override fun onPersianCalendarLibraryClicked(
@@ -74,9 +80,9 @@ class MainActivity : AppCompatActivity() {
                     firstWorkCalendarModel: WorkCalendarModel?,
                     lastWorkCalendarModel: WorkCalendarModel?
                 ) {
-                    println("onPersianCalendarLibraryScrolled >> firstWorkCalendarModel : $firstWorkCalendarModel")
-                    println("onPersianCalendarLibraryScrolled >> lastWorkCalendarModel : $lastWorkCalendarModel")
-                    println("onPersianCalendarLibraryScrolled >> *************************************************")
+//                    println("onPersianCalendarLibraryScrolled >> firstWorkCalendarModel : $firstWorkCalendarModel")
+//                    println("onPersianCalendarLibraryScrolled >> lastWorkCalendarModel : $lastWorkCalendarModel")
+//                    println("onPersianCalendarLibraryScrolled >> *************************************************")
                 }
 
             }
@@ -88,6 +94,36 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val items = mutableListOf<CalendarDayModel>().apply {
+        add(CalendarDayModel(isoDate = "2021-11-01"))
+        add(CalendarDayModel(isoDate = "2021-11-02"))
+        add(CalendarDayModel(isoDate = "2021-11-03"))
+        add(CalendarDayModel(isoDate = "2021-11-04"))
+        add(CalendarDayModel(isoDate = "2021-11-05"))
+        add(CalendarDayModel(isoDate = "2021-11-06"))
+        add(CalendarDayModel(isoDate = "2021-11-07"))
+        add(CalendarDayModel(isoDate = "2021-11-08"))
+        add(CalendarDayModel(isoDate = "2021-11-09"))
+        add(CalendarDayModel(isoDate = "2021-11-10"))
+        add(CalendarDayModel(isoDate = "2021-11-11"))
+        add(CalendarDayModel(isoDate = "2021-11-12"))
+        add(CalendarDayModel(isoDate = "2021-11-13"))
+        add(CalendarDayModel(isoDate = "2021-11-14"))
+        add(CalendarDayModel(isoDate = "2021-11-15"))
+        add(CalendarDayModel(isoDate = "2021-11-16"))
+        add(CalendarDayModel(isoDate = "2021-11-17"))
+        add(CalendarDayModel(isoDate = "2021-11-18"))
+        add(CalendarDayModel(isoDate = "2021-11-19"))
+        add(CalendarDayModel(isoDate = "2021-11-20"))
+        add(CalendarDayModel(isoDate = "2021-11-21"))
+        add(CalendarDayModel(isoDate = "2021-11-22"))
+        add(CalendarDayModel(isoDate = "2021-11-23"))
+        add(CalendarDayModel(isoDate = "2021-11-24"))
+        add(CalendarDayModel(isoDate = "2021-11-25"))
+        add(CalendarDayModel(isoDate = "2021-11-26"))
+        add(CalendarDayModel(isoDate = "2021-11-27"))
+        add(CalendarDayModel(isoDate = "2021-11-28"))
+        add(CalendarDayModel(isoDate = "2021-11-29"))
+        add(CalendarDayModel(isoDate = "2021-11-30"))
         add(CalendarDayModel(isoDate = "2021-12-01"))
         add(CalendarDayModel(isoDate = "2021-12-02"))
         add(CalendarDayModel(isoDate = "2021-12-03"))

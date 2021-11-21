@@ -146,29 +146,26 @@ class WorkCalendarView @JvmOverloads constructor(
     }
 
     fun showNextWeek() {
-        val lastDayOfWeek = getLastDayOfWeek()
-        lastDayOfWeek?.let { workCalendarModel ->
-            binding.recyclerViewDay.adapter?.let { adapter ->
-                if (adapter is WorkCalendarAdapter) {
-                    var lastDayOfWeekIndex = adapter.items.indexOf(workCalendarModel)
-                    if (lastDayOfWeekIndex + 7 >= adapter.items.size)
-                        lastDayOfWeekIndex = adapter.items.size
-                    binding.recyclerViewDay.smoothScrollToPosition(lastDayOfWeekIndex)
+        binding.recyclerViewDay.adapter?.let { adapter ->
+            if (adapter is WorkCalendarAdapter) {
+                var lastDayOfWeekIndex =
+                    (binding.recyclerViewDay.layoutManager as LinearLayoutManager).findLastVisibleItemPosition() + 7
+                if (lastDayOfWeekIndex >= adapter.itemCount) {
+                    lastDayOfWeekIndex = adapter.itemCount
                 }
+                binding.recyclerViewDay.smoothScrollToPosition(lastDayOfWeekIndex)
             }
         }
     }
 
     fun showPastWeek() {
-        val firstDayOfWeek = getFirstDayOfWeek()
-        firstDayOfWeek?.let { workCalendarModel ->
-            binding.recyclerViewDay.adapter?.let { adapter ->
-                if (adapter is WorkCalendarAdapter) {
-                    var lastDayOfWeekIndex = adapter.items.indexOf(workCalendarModel)
-                    if (lastDayOfWeekIndex - 7 < 0)
-                        lastDayOfWeekIndex = adapter.items.size
-                    binding.recyclerViewDay.smoothScrollToPosition(lastDayOfWeekIndex)
-                }
+        binding.recyclerViewDay.adapter?.let { adapter ->
+            if (adapter is WorkCalendarAdapter) {
+                var firstDayOfWeekIndex =
+                    (binding.recyclerViewDay.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition() - 7
+                if (firstDayOfWeekIndex < 0)
+                    firstDayOfWeekIndex = 0
+                binding.recyclerViewDay.smoothScrollToPosition(firstDayOfWeekIndex)
             }
         }
     }
@@ -176,9 +173,10 @@ class WorkCalendarView @JvmOverloads constructor(
     fun getFirstDayOfWeek(): WorkCalendarModel? {
         binding.recyclerViewDay.adapter?.let { adapter ->
             if (adapter is WorkCalendarAdapter) {
-                val findFirstCompletelyVisibleItemPosition =
+                val findFirstVisibleItemPosition =
                     (binding.recyclerViewDay.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
-                return adapter.items[findFirstCompletelyVisibleItemPosition]
+                println("getFirstDayOfWeek >> findFirstVisibleItemPosition : $findFirstVisibleItemPosition")
+                return adapter.getItem(position = findFirstVisibleItemPosition)
             }
         }
         return null
@@ -187,9 +185,10 @@ class WorkCalendarView @JvmOverloads constructor(
     fun getLastDayOfWeek(): WorkCalendarModel? {
         binding.recyclerViewDay.adapter?.let { adapter ->
             if (adapter is WorkCalendarAdapter) {
-                val findLastCompletelyVisibleItemPosition =
+                val findLastVisibleItemPosition =
                     (binding.recyclerViewDay.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
-                return adapter.items[findLastCompletelyVisibleItemPosition]
+                println("getLastDayOfWeek >> findLastVisibleItemPosition : $findLastVisibleItemPosition")
+                return adapter.getItem(position = findLastVisibleItemPosition)
             }
         }
         return null
@@ -213,6 +212,7 @@ class WorkCalendarView @JvmOverloads constructor(
     }
 
     private fun initializeView(attributeSet: AttributeSet? = null, defStyleAttr: Int) {
+        var reverseDayList: Boolean = false
         if (attributeSet != null) {
             val typedArray = context.obtainStyledAttributes(
                 attributeSet,
@@ -236,7 +236,7 @@ class WorkCalendarView @JvmOverloads constructor(
             val weekCalendarSrcEnd = typedArray.getDrawable(
                 R.styleable.WorkCalendarView_weekCalendarSrcEnd,
             )
-            val reverseDayList = typedArray.getBoolean(
+            reverseDayList = typedArray.getBoolean(
                 R.styleable.WorkCalendarView_reverseDayList, false
             )
             (binding.recyclerViewDay.layoutParams as MarginLayoutParams).setMargins(
@@ -249,13 +249,12 @@ class WorkCalendarView @JvmOverloads constructor(
             weekCalendarBackgroundEnd?.let { binding.imageViewEnd.background = it }
             weekCalendarSrcStart?.let { binding.imageViewStart.setImageDrawable(it) }
             weekCalendarSrcEnd?.let { binding.imageViewEnd.setImageDrawable(it) }
-            context?.let {
-                binding.recyclerViewDay.layoutManager =
-                    LinearLayoutManager(it, LinearLayoutManager.HORIZONTAL, reverseDayList)
-            }
         }
         binding.recyclerViewDay.setHasFixedSize(true)
         context?.let {
+            println("reverseDayList : $reverseDayList")
+            binding.recyclerViewDay.layoutManager =
+                LinearLayoutManager(it, LinearLayoutManager.HORIZONTAL, reverseDayList)
             binding.recyclerViewDay.adapter =
                 WorkCalendarAdapter(context = it)
         }
@@ -286,7 +285,6 @@ class WorkCalendarView @JvmOverloads constructor(
         binding.recyclerViewDay.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
-                println("OnScrollListener >> onScrollStateChanged >> newState : $newState")
                 if (RecyclerView.SCROLL_STATE_IDLE == newState) {
                     onClickListenerPersianCalendarLibrary?.onPersianCalendarLibraryScrolled(
                         firstWorkCalendarModel = getFirstDayOfWeek(),
@@ -301,7 +299,6 @@ class WorkCalendarView @JvmOverloads constructor(
         var persianYearMonth = ""
         val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         format.parse(isoDate)?.let { date ->
-            println("isoDate : $isoDate , getMonthPersianStr :  ${PersianCalendarWrapper(date.time).getMonthPersianStr()}")
             persianYearMonth = PersianCalendarWrapper(date.time).getPersianYearMonth()
         }
         return persianYearMonth
