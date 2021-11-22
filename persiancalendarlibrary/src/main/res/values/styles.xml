@@ -28,6 +28,7 @@
 
     <declare-styleable name="WorkCalendarView">
         <attr name="dayListMarginTop" format="dimension" />
+        <attr name="weekCalendarButtonPadding" format="dimension" />
         <attr name="weekCalendarBackgroundStart" format="reference" />
         <attr name="weekCalendarBackgroundEnd" format="reference" />
         <attr name="weekCalendarSrcStart" format="reference" />

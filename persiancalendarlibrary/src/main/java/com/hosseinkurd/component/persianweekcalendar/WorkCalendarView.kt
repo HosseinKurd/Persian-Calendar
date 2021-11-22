@@ -231,6 +231,10 @@ class WorkCalendarView @JvmOverloads constructor(
                 R.styleable.WorkCalendarView_dayListMarginTop,
                 context.resources.getDimension(R.dimen.recyclerview_day_margin_top_persian_calendar_library)
             )
+            val weekCalendarButtonPadding = typedArray.getDimension(
+                R.styleable.WorkCalendarView_weekCalendarButtonPadding,
+                context.resources.getDimension(R.dimen.padding_small_persian_calendar_library)
+            ).toInt()
             val weekCalendarBackgroundStart = typedArray.getDrawable(
                 R.styleable.WorkCalendarView_weekCalendarBackgroundStart,
             )
@@ -258,6 +262,8 @@ class WorkCalendarView @JvmOverloads constructor(
                 0,
                 0
             )
+            binding.imageViewStart.setPadding(weekCalendarButtonPadding, weekCalendarButtonPadding, weekCalendarButtonPadding, weekCalendarButtonPadding)
+            binding.imageViewEnd.setPadding(weekCalendarButtonPadding, weekCalendarButtonPadding, weekCalendarButtonPadding, weekCalendarButtonPadding)
             weekCalendarBackgroundStart?.let { binding.imageViewStart.background = it }
             weekCalendarBackgroundEnd?.let { binding.imageViewEnd.background = it }
             weekCalendarSrcStart?.let { binding.imageViewStart.setImageDrawable(it) }

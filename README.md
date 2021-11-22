@@ -124,6 +124,7 @@ Set interface for desired actions
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:weekCalendarButtonPadding="8dp"
         app:weekCalendarBackgroundStart="@drawable/dr_click"
         app:weekCalendarSrcEnd="@drawable/ic_arrow_end" />
 
