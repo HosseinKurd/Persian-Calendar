@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.hosseinkurd.app.persiancalendar">
+    package="com.hosseinkurd.app.persianweekcalendar">
 
     <application
         android:allowBackup="true"
@@ -12,7 +12,7 @@
         android:theme="@style/Theme.PersianCalendar"
         tools:replace="android:theme">
         <activity
-            android:name=".MainActivity"
+            android:name="com.hosseinkurd.app.persianweekcalendar.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

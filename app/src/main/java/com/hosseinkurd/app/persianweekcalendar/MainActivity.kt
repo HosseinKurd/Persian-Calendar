@@ -1,13 +1,13 @@
-package com.hosseinkurd.app.persiancalendar
+package com.hosseinkurd.app.persianweekcalendar
 
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.hosseinkurd.app.persiancalendarlibrary.WorkCalendarView
-import com.hosseinkurd.app.persiancalendarlibrary.interfaces.OnClickListenerPersianCalendarLibrary
-import com.hosseinkurd.app.persiancalendarlibrary.models.CalendarDayModel
-import com.hosseinkurd.app.persiancalendarlibrary.models.WorkCalendarModel
+import com.hosseinkurd.component.persianweekcalendar.WorkCalendarView
+import com.hosseinkurd.component.persianweekcalendar.interfaces.OnClickListenerPersianCalendarLibrary
+import com.hosseinkurd.component.persianweekcalendar.models.CalendarDayModel
+import com.hosseinkurd.component.persianweekcalendar.models.WorkCalendarModel
 
 
 class MainActivity : AppCompatActivity() {

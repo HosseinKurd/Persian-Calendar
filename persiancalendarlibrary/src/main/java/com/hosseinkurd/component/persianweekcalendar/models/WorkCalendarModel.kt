@@ -1,7 +1,7 @@
-package com.hosseinkurd.app.persiancalendarlibrary.models
+package com.hosseinkurd.component.persianweekcalendar.models
 
 import android.os.Parcelable
-import com.hosseinkurd.app.persiancalendarlibrary.enums.EnumWorkCalendarState
+import com.hosseinkurd.component.persianweekcalendar.enums.EnumWorkCalendarState
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

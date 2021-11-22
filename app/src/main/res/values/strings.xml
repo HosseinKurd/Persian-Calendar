@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Persian Calendar</string>
+    <string name="app_name">Persian Week Calendar</string>
     <string name="go_to_today">Go to Today</string>
     <string name="go_to_selected_day">Go to Selected day</string>
     <string name="first_day_in_view">First day in view</string>

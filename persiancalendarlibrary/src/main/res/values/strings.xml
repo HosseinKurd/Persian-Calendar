@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Persian Calendar Library</string>
+    <string name="app_name">Persian Week Calendar Library</string>
     <string name="saturday_persian_calendar_library">شنبه</string>
     <string name="sunday_persian_calendar_library">یکشنبه</string>
     <string name="monday_persian_calendar_library">دوشنبه</string>

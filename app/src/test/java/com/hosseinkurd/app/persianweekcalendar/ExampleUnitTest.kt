@@ -1,4 +1,4 @@
-package com.hosseinkurd.app.persiancalendarlibrary
+package com.hosseinkurd.app.persianweekcalendar
 
 import org.junit.Test
 

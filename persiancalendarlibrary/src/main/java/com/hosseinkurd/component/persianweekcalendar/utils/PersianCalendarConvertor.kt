@@ -1,4 +1,4 @@
-package com.hosseinkurd.app.persiancalendarlibrary.utils
+package com.hosseinkurd.component.persianweekcalendar.utils
 
 import java.util.*
 

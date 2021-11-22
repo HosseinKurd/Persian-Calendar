@@ -1,4 +1,4 @@
-package com.hosseinkurd.app.persiancalendarlibrary
+package com.hosseinkurd.component.persianweekcalendar
 
 import android.content.Context
 import android.util.AttributeSet
@@ -9,17 +9,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
-import com.hosseinkurd.app.persiancalendarlibrary.adapters.AbstractAdapter
-import com.hosseinkurd.app.persiancalendarlibrary.adapters.WorkCalendarAdapter
-import com.hosseinkurd.app.persiancalendarlibrary.databinding.WorkCalendarViewBinding
-import com.hosseinkurd.app.persiancalendarlibrary.enums.EnumWorkCalendarState
-import com.hosseinkurd.app.persiancalendarlibrary.interfaces.OnClickListenerPersianCalendarLibrary
-import com.hosseinkurd.app.persiancalendarlibrary.models.CalendarDayModel
-import com.hosseinkurd.app.persiancalendarlibrary.models.WorkCalendarModel
-import com.hosseinkurd.app.persiancalendarlibrary.utils.PersianCalendarConvertor
-import com.hosseinkurd.app.persiancalendarlibrary.utils.PublicFunctions
-import com.hosseinkurd.app.persiancalendarlibrary.utils.PublicValues
-import com.hosseinkurd.app.persiancalendarlibrary.utils.twoDigitsPersianCalendarLibrary
+import com.hosseinkurd.component.persianweekcalendar.adapters.AbstractAdapter
+import com.hosseinkurd.component.persianweekcalendar.adapters.WorkCalendarAdapter
+import com.hosseinkurd.component.persianweekcalendar.databinding.WorkCalendarViewBinding
+import com.hosseinkurd.component.persianweekcalendar.enums.EnumWorkCalendarState
+import com.hosseinkurd.component.persianweekcalendar.interfaces.OnClickListenerPersianCalendarLibrary
+import com.hosseinkurd.component.persianweekcalendar.models.CalendarDayModel
+import com.hosseinkurd.component.persianweekcalendar.models.WorkCalendarModel
+import com.hosseinkurd.component.persianweekcalendar.utils.PersianCalendarConvertor
+import com.hosseinkurd.component.persianweekcalendar.utils.PublicFunctions
+import com.hosseinkurd.component.persianweekcalendar.utils.PublicValues
+import com.hosseinkurd.component.persianweekcalendar.utils.twoDigitsPersianCalendarLibrary
 import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat

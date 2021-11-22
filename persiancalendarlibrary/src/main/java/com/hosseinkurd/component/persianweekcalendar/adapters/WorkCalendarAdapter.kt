@@ -1,16 +1,16 @@
-package com.hosseinkurd.app.persiancalendarlibrary.adapters
+package com.hosseinkurd.component.persianweekcalendar.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.hosseinkurd.app.persiancalendarlibrary.R
-import com.hosseinkurd.app.persiancalendarlibrary.databinding.ItemWorkCalendarNormalBinding
-import com.hosseinkurd.app.persiancalendarlibrary.databinding.ItemWorkCalendarReservedBinding
-import com.hosseinkurd.app.persiancalendarlibrary.databinding.ItemWorkCalendarSelectedBinding
-import com.hosseinkurd.app.persiancalendarlibrary.enums.EnumWorkCalendarState
-import com.hosseinkurd.app.persiancalendarlibrary.models.WorkCalendarModel
+import com.hosseinkurd.component.persianweekcalendar.R
+import com.hosseinkurd.component.persianweekcalendar.databinding.ItemWorkCalendarNormalBinding
+import com.hosseinkurd.component.persianweekcalendar.databinding.ItemWorkCalendarReservedBinding
+import com.hosseinkurd.component.persianweekcalendar.databinding.ItemWorkCalendarSelectedBinding
+import com.hosseinkurd.component.persianweekcalendar.enums.EnumWorkCalendarState
+import com.hosseinkurd.component.persianweekcalendar.models.WorkCalendarModel
 
 class WorkCalendarAdapter(
     context: Context?,

@@ -1,4 +1,4 @@
-package com.hosseinkurd.app.persiancalendarlibrary
+package com.hosseinkurd.app.persianweekcalendar
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.hosseinkurd.app.persiancalendarlibrary", appContext.packageName)
+        assertEquals("com.hosseinkurd.app.persiancalendar", appContext.packageName)
     }
 }

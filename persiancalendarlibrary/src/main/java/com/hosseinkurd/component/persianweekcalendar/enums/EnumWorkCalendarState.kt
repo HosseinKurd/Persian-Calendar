@@ -1,4 +1,4 @@
-package com.hosseinkurd.app.persiancalendarlibrary.enums
+package com.hosseinkurd.component.persianweekcalendar.enums
 
 enum class EnumWorkCalendarState(val state: Int) {
     NORMAL_DAY(0),

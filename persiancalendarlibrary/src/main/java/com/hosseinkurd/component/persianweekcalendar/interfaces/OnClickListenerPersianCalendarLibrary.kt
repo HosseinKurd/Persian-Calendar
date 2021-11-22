@@ -1,6 +1,6 @@
-package com.hosseinkurd.app.persiancalendarlibrary.interfaces
+package com.hosseinkurd.component.persianweekcalendar.interfaces
 
-import com.hosseinkurd.app.persiancalendarlibrary.models.WorkCalendarModel
+import com.hosseinkurd.component.persianweekcalendar.models.WorkCalendarModel
 
 interface OnClickListenerPersianCalendarLibrary {
     fun onPersianCalendarLibraryStartClicked()

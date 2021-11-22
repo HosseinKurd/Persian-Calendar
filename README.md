@@ -115,7 +115,7 @@ Set interface for desired actions
 
 # XML:
 
-    <com.hosseinkurd.app.persiancalendarlibrary.WorkCalendarView
+    <com.hosseinkurd.component.persiancalendarlibrary.WorkCalendarView
         android:id="@+id/workCalendarView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

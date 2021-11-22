@@ -1,4 +1,4 @@
-package com.hosseinkurd.app.persiancalendarlibrary.adapters
+package com.hosseinkurd.component.persianweekcalendar.adapters
 
 import android.content.Context
 import android.view.LayoutInflater

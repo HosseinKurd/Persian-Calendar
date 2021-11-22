@@ -6,7 +6,7 @@
 
         <variable
             name="workCalendarModel"
-            type="com.hosseinkurd.app.persiancalendarlibrary.models.WorkCalendarModel" />
+            type="com.hosseinkurd.component.persianweekcalendar.models.WorkCalendarModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

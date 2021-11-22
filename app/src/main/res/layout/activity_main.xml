@@ -7,7 +7,7 @@
     android:layoutDirection="rtl"
     tools:context=".MainActivity">
 
-    <com.hosseinkurd.app.persiancalendarlibrary.WorkCalendarView
+    <com.hosseinkurd.component.persianweekcalendar.WorkCalendarView
         android:id="@+id/workCalendarView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
