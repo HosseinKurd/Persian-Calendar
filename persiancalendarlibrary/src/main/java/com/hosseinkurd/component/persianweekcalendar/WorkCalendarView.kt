@@ -277,11 +277,9 @@ class WorkCalendarView @JvmOverloads constructor(
 
     private fun initializeListeners() {
         binding.imageViewStart.setOnClickListener {
-            showPastWeek()
             onClickListenerPersianCalendarLibrary?.onPersianCalendarLibraryStartClicked()
         }
         binding.imageViewEnd.setOnClickListener {
-            showNextWeek()
             onClickListenerPersianCalendarLibrary?.onPersianCalendarLibraryEndClicked()
         }
         binding.recyclerViewDay.adapter?.let { adapter ->
