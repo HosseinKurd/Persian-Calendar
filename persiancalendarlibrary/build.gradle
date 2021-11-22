@@ -58,7 +58,10 @@ afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
-                artifactId = 'PersianCalendarLibrary'
+                from components.release
+                groupId = 'com.github.HosseinKurd'
+                artifactId = 'Persian-Calendar'
+                version = '0.30.12'
             }
         }
     }
