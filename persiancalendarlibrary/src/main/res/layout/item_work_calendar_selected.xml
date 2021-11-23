@@ -13,8 +13,7 @@
         android:id="@+id/constraintLayout_parent"
         android:layout_width="@dimen/width_adapter_item_persian_calendar_library"
         android:layout_height="match_parent"
-        android:paddingTop="@dimen/padding_small_persian_calendar_library"
-        android:paddingBottom="@dimen/padding_small_persian_calendar_library">
+        android:paddingTop="@dimen/padding_small_persian_calendar_library">
 
         <TextView
             android:id="@+id/textview_day_of_month"

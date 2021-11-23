@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:centerColor="@color/gray_dark_persian_calendar_library"
+        android:endColor="@color/gray_light_extra_persian_calendar_library"
+        android:startColor="@color/gray_light_extra_persian_calendar_library" />
+</shape>

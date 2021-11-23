@@ -7,7 +7,9 @@
         android:id="@+id/constraintLayout_parent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/padding_medium_persian_calendar_library">
+        android:paddingStart="@dimen/padding_medium_persian_calendar_library"
+        android:paddingTop="@dimen/padding_medium_persian_calendar_library"
+        android:paddingEnd="@dimen/padding_medium_persian_calendar_library">
 
         <ImageView
             android:id="@+id/imageView_start"
@@ -48,6 +50,17 @@
             app:layout_constraintBottom_toBottomOf="@id/textView_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/textView_title" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="@dimen/margin_divider_persian_calendar_library"
+            android:layout_marginEnd="@dimen/margin_divider_persian_calendar_library"
+            android:layout_marginBottom="0.7dp"
+            android:background="@drawable/shape_divider_persian_calendar_library"
+            app:layout_constraintBottom_toBottomOf="@+id/recyclerViewDay"
+            app:layout_constraintEnd_toEndOf="@+id/recyclerViewDay"
+            app:layout_constraintStart_toStartOf="@+id/recyclerViewDay" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewDay"

@@ -241,15 +241,6 @@ class WorkCalendarView @JvmOverloads constructor(
         binding.imageViewEnd.setOnClickListener {
             onClickListenerPersianCalendarLibrary?.onPersianCalendarLibraryEndClicked()
         }
-        binding.recyclerViewDay.adapter?.let { adapter ->
-            if (adapter is WorkCalendarAdapter) adapter.onItemClickListener =
-                object : AbstractAdapter.OnItemClickListener<WorkCalendarModel> {
-                    override fun onClicked(actionId: Int, position: Int, item: WorkCalendarModel) {
-                        onClickListenerPersianCalendarLibrary?.onPersianCalendarLibraryClicked(item)
-                        binding.textViewTitle.text = getYearMonth(item.isoDate!!)
-                    }
-                }
-        }
         binding.recyclerViewDay.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
@@ -274,7 +265,15 @@ class WorkCalendarView @JvmOverloads constructor(
                 LinearLayoutManager(it, LinearLayoutManager.HORIZONTAL, reverseDayList)
             binding.recyclerViewDay.adapter =
                 WorkCalendarAdapter(context = it, dayItemWidth)
-            println("initializeView >> dayItemWidth : $dayItemWidth , $width")
+        }
+        binding.recyclerViewDay.adapter?.let { adapter ->
+            if (adapter is WorkCalendarAdapter) adapter.onItemClickListener =
+                object : AbstractAdapter.OnItemClickListener<WorkCalendarModel> {
+                    override fun onClicked(actionId: Int, position: Int, item: WorkCalendarModel) {
+                        onClickListenerPersianCalendarLibrary?.onPersianCalendarLibraryClicked(item)
+                        binding.textViewTitle.text = getYearMonth(item.isoDate!!)
+                    }
+                }
         }
     }
 
