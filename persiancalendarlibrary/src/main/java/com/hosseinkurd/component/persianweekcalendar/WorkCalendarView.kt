@@ -137,6 +137,16 @@ class WorkCalendarView @JvmOverloads constructor(
         return null
     }
 
+    fun getDays(): MutableList<WorkCalendarModel>? {
+        binding.recyclerViewDay.adapter?.let { adapter ->
+            if (adapter.itemCount < 1) return null
+            if (adapter is WorkCalendarAdapter) {
+                return adapter.items
+            }
+        }
+        return null
+    }
+
     fun getFirstDayOfWeek(): WorkCalendarModel? {
         binding.recyclerViewDay.adapter?.let { adapter ->
             if (adapter.itemCount < 1) return null
