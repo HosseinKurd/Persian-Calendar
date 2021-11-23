@@ -72,9 +72,9 @@ class WorkCalendarView @JvmOverloads constructor(
                     val index = adapter.items.indexOf(item)
                     binding.recyclerViewDay.scrollToPosition(index)
                     binding.textViewTitle.text = getYearMonth(item.isoDate!!)
+                    callOnScrolledManually()
                 }
             }
-
         }
     }
 
@@ -94,6 +94,7 @@ class WorkCalendarView @JvmOverloads constructor(
                     binding.recyclerViewDay.scrollToPosition(index)
                     adapter.changeSelectedItem(item)
                     binding.textViewTitle.text = getYearMonth(item.isoDate!!)
+                    callOnScrolledManually()
                 }
             }
         }
@@ -108,6 +109,7 @@ class WorkCalendarView @JvmOverloads constructor(
                     lastDayOfWeekIndex = adapter.itemCount
                 }
                 binding.recyclerViewDay.scrollToPosition(lastDayOfWeekIndex)
+                callOnScrolledManually()
             }
         }
     }
@@ -120,8 +122,19 @@ class WorkCalendarView @JvmOverloads constructor(
                 if (firstDayOfWeekIndex < 0)
                     firstDayOfWeekIndex = 0
                 binding.recyclerViewDay.scrollToPosition(firstDayOfWeekIndex)
+                callOnScrolledManually()
             }
         }
+    }
+
+    fun getSelectedDayOfWeek(): WorkCalendarModel? {
+        binding.recyclerViewDay.adapter?.let { adapter ->
+            if (adapter.itemCount < 1) return null
+            if (adapter is WorkCalendarAdapter) {
+                return adapter.items.firstOrNull { it.isSelected }
+            }
+        }
+        return null
     }
 
     fun getFirstDayOfWeek(): WorkCalendarModel? {
@@ -130,6 +143,7 @@ class WorkCalendarView @JvmOverloads constructor(
             if (adapter is WorkCalendarAdapter) {
                 val findFirstVisibleItemPosition =
                     (binding.recyclerViewDay.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+                if (findFirstVisibleItemPosition < 0 || findFirstVisibleItemPosition >= adapter.itemCount) return null
                 return adapter.getItem(position = findFirstVisibleItemPosition)
             }
         }
@@ -142,6 +156,7 @@ class WorkCalendarView @JvmOverloads constructor(
             if (adapter is WorkCalendarAdapter) {
                 val findLastVisibleItemPosition =
                     (binding.recyclerViewDay.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
+                if (findLastVisibleItemPosition < 0 || findLastVisibleItemPosition >= adapter.itemCount) return null
                 return adapter.getItem(position = findLastVisibleItemPosition)
             }
         }
@@ -163,6 +178,13 @@ class WorkCalendarView @JvmOverloads constructor(
         binding.recyclerViewDay.adapter?.let { adapter ->
             if (adapter is WorkCalendarAdapter) adapter.changeItemState(isoDate, workCalendarState)
         }
+    }
+
+    private fun callOnScrolledManually() {
+        onClickListenerPersianCalendarLibrary?.onPersianCalendarLibraryScrolled(
+            firstWorkCalendarModel = getFirstDayOfWeek(),
+            lastWorkCalendarModel = getLastDayOfWeek()
+        )
     }
 
     private fun initializeView(attributeSet: AttributeSet? = null, defStyleAttr: Int) {
