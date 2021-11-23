@@ -3,6 +3,7 @@ package com.hosseinkurd.component.persianweekcalendar.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.updateLayoutParams
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.hosseinkurd.component.persianweekcalendar.R
@@ -14,6 +15,7 @@ import com.hosseinkurd.component.persianweekcalendar.models.WorkCalendarModel
 
 class WorkCalendarAdapter(
     context: Context?,
+    val containerWidth: Int,
 ) : AbstractAdapter<WorkCalendarAdapter.AbstractViewHolder, WorkCalendarModel>(
     context!!,
 ) {
@@ -86,6 +88,10 @@ class WorkCalendarAdapter(
 
     inner class ViewHolderWorkCalendarNormal(private val binding: ItemWorkCalendarNormalBinding) :
         AbstractViewHolder(binding) {
+        init {
+            binding.constraintLayoutParent.updateLayoutParams { width = containerWidth }
+        }
+
         override fun onFill(position: Int) {
             if (getItem(position = position).isSelected) {
                 binding.viewUnderline.setBackgroundResource(R.drawable.background_underline_blue_dark)
@@ -103,6 +109,10 @@ class WorkCalendarAdapter(
 
     inner class ViewHolderWorkCalendarReserved(private val binding: ItemWorkCalendarReservedBinding) :
         AbstractViewHolder(binding) {
+        init {
+            binding.constraintLayoutParent.updateLayoutParams { width = containerWidth }
+        }
+
         override fun onFill(position: Int) {
             if (getItem(position = position).isSelected) {
                 binding.viewUnderline.setBackgroundResource(R.drawable.background_underline_blue_dark)
@@ -120,6 +130,10 @@ class WorkCalendarAdapter(
 
     inner class ViewHolderWorkCalendarSelected(private val binding: ItemWorkCalendarSelectedBinding) :
         AbstractViewHolder(binding) {
+        init {
+            binding.constraintLayoutParent.updateLayoutParams { width = containerWidth }
+        }
+
         override fun onFill(position: Int) {
             if (getItem(position = position).isSelected) {
                 binding.viewUnderline.setBackgroundResource(R.drawable.background_underline_blue_dark)

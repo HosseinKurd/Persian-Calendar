@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.marginEnd
+import androidx.core.view.marginStart
 import com.hosseinkurd.component.persianweekcalendar.WorkCalendarView
 import com.hosseinkurd.component.persianweekcalendar.interfaces.OnClickListenerPersianCalendarLibrary
 import com.hosseinkurd.component.persianweekcalendar.models.CalendarDayModel

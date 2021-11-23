@@ -62,7 +62,7 @@ afterEvaluate {
                 from components.release
                 groupId = 'com.github.HosseinKurd'
                 artifactId = 'Persian-Calendar'
-                version = '0.30.17'
+                version = '0.30.18'
             }
         }
     }
