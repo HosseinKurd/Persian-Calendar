@@ -190,6 +190,15 @@ class WorkCalendarView @JvmOverloads constructor(
         }
     }
 
+    fun changeItemState(
+        isoDates: MutableList<String>,
+        workCalendarState: EnumWorkCalendarState = EnumWorkCalendarState.NORMAL_DAY
+    ) {
+        binding.recyclerViewDay.adapter?.let { adapter ->
+            if (adapter is WorkCalendarAdapter) adapter.changeItemStates(isoDates, workCalendarState)
+        }
+    }
+
     private fun callOnScrolledManually() {
         onClickListenerPersianCalendarLibrary?.onPersianCalendarLibraryScrolled(
             firstWorkCalendarModel = getFirstDayOfWeek(),
