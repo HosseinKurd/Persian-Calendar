@@ -79,11 +79,26 @@ class WorkCalendarAdapter(
         isoDate: String,
         workCalendarState: EnumWorkCalendarState = EnumWorkCalendarState.NORMAL_DAY
     ) {
-        items.firstOrNull { it.isoDate == isoDate }
-            ?.let {
-                it.workCalendarState = workCalendarState
-                notifyItemChanged(items.indexOf(it))
+        items.forEachIndexed { index, workCalendarModel ->
+            if (workCalendarModel.isoDate == isoDate && workCalendarModel.workCalendarState != EnumWorkCalendarState.TODAY) {
+                workCalendarModel.workCalendarState = workCalendarState
+                notifyItemChanged(index)
             }
+        }
+    }
+
+    fun changeItemStates(
+        isoDates: MutableList<String>,
+        workCalendarState: EnumWorkCalendarState = EnumWorkCalendarState.NORMAL_DAY
+    ) {
+        items.forEachIndexed { index, workCalendarModel ->
+            isoDates.forEachIndexed { _, isoDate ->
+                if (workCalendarModel.isoDate == isoDate && workCalendarModel.workCalendarState != EnumWorkCalendarState.TODAY) {
+                    workCalendarModel.workCalendarState = workCalendarState
+                    notifyItemChanged(index)
+                }
+            }
+        }
     }
 
     inner class ViewHolderWorkCalendarNormal(private val binding: ItemWorkCalendarNormalBinding) :
