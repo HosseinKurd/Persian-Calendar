@@ -11,7 +11,6 @@ object PublicFunctions {
             dateFormat.parse(dateString)?.let { date ->
                 val calendar: Calendar = Calendar.getInstance(TimeZone.getDefault(), Locale.getDefault())
                 calendar.time = date
-                calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) - 1)
                 return calendar
             }
         } catch (e: ParseException) {
