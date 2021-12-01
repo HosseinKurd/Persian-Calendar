@@ -195,7 +195,44 @@ class WorkCalendarView @JvmOverloads constructor(
         workCalendarState: EnumWorkCalendarState = EnumWorkCalendarState.NORMAL_DAY
     ) {
         binding.recyclerViewDay.adapter?.let { adapter ->
-            if (adapter is WorkCalendarAdapter) adapter.changeItemStates(isoDates, workCalendarState)
+            if (adapter is WorkCalendarAdapter) adapter.changeItemStates(
+                isoDates,
+                workCalendarState
+            )
+        }
+    }
+
+    fun setTitle(title: String) {
+        binding.textViewTitle.text = title
+    }
+
+    fun getVisibleItemList(): MutableList<WorkCalendarModel> {
+        return mutableListOf<WorkCalendarModel>().apply {
+            binding.recyclerViewDay.adapter?.let { adapter ->
+                if (adapter.itemCount > 0) {
+                    if (adapter is WorkCalendarAdapter) {
+                        val firstItemPosition =
+                            (binding.recyclerViewDay.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+                        val lastItemPosition =
+                            (binding.recyclerViewDay.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
+                        if (lastItemPosition >= 0 && lastItemPosition < adapter.itemCount) {
+                            if (firstItemPosition >= 0 || firstItemPosition < adapter.itemCount) {
+                                if (firstItemPosition == lastItemPosition) {
+                                    add(adapter.getItem(position = firstItemPosition))
+                                } else {
+                                    addAll(
+                                        adapter.items.subList(
+                                            firstItemPosition,
+                                            lastItemPosition
+                                        )
+                                    )
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
         }
     }
 
