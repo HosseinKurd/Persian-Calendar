@@ -31,7 +31,7 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:gravity="center"
-            android:textDirection="rtl"
+            android:textDirection="ltr"
             android:textSize="@dimen/text_size_title"
             app:layout_constraintEnd_toStartOf="@+id/imageView_end"
             app:layout_constraintStart_toEndOf="@+id/imageView_start"

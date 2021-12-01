@@ -91,7 +91,9 @@ class MainActivity : AppCompatActivity() {
                 ) {
                     println("onPersianCalendarLibraryScrolled >> firstWorkCalendarModel : $firstWorkCalendarModel")
                     println("onPersianCalendarLibraryScrolled >> lastWorkCalendarModel : $lastWorkCalendarModel")
+                    println("onPersianCalendarLibraryScrolled >> MoreNumerousMonthInWeek : ${workCalendarView.getMoreNumerousMonthInWeek()}")
                     println("onPersianCalendarLibraryScrolled >> *************************************************")
+                    workCalendarView.setTitle(workCalendarView.getMoreNumerousMonthInWeek())
                 }
 
             }

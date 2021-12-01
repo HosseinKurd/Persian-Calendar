@@ -236,6 +236,27 @@ class WorkCalendarView @JvmOverloads constructor(
         }
     }
 
+    fun getMoreNumerousMonthInWeek(): String {
+        val workCalendarModelList = getVisibleItemList()
+        if (workCalendarModelList.isEmpty()) return ""
+        var firstYearAndMonthCount = 0
+        var secondYearAndMonthCount = 0
+        var firstYearAndMonth = ""
+        var secondYearAndMonth = ""
+        workCalendarModelList.forEach { item ->
+            val yearAndMonth = getYearMonth(item.isoDate!!)
+            if (firstYearAndMonth.isEmpty() || firstYearAndMonth == yearAndMonth) {
+                firstYearAndMonth = yearAndMonth
+                firstYearAndMonthCount++
+            } else if (secondYearAndMonth.isEmpty() || secondYearAndMonth == yearAndMonth) {
+                secondYearAndMonth = yearAndMonth
+                secondYearAndMonthCount++
+            }
+        }
+        if (firstYearAndMonthCount > secondYearAndMonthCount) return firstYearAndMonth
+        return secondYearAndMonth
+    }
+
     private fun callOnScrolledManually() {
         onClickListenerPersianCalendarLibrary?.onPersianCalendarLibraryScrolled(
             firstWorkCalendarModel = getFirstDayOfWeek(),
@@ -469,7 +490,7 @@ class WorkCalendarView @JvmOverloads constructor(
     private fun generateCalendarDays() {
         val items = mutableListOf<CalendarDayModel>()
         val dateFormat = SimpleDateFormat(PublicValues.PATTERN_YYYY_MM_dd, Locale.getDefault())
-        for (i in -60..60) {
+        for (i in -366..366) {
             val calendar = Calendar.getInstance()
             calendar.add(Calendar.DATE, i)
             val day = dateFormat.format(calendar.time)
