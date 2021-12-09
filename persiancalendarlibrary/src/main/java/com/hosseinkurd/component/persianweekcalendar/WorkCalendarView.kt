@@ -1,6 +1,8 @@
 package com.hosseinkurd.component.persianweekcalendar
 
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -20,9 +22,6 @@ import com.hosseinkurd.component.persianweekcalendar.utils.PersianCalendarConver
 import com.hosseinkurd.component.persianweekcalendar.utils.PublicFunctions
 import com.hosseinkurd.component.persianweekcalendar.utils.PublicValues
 import com.hosseinkurd.component.persianweekcalendar.utils.twoDigitsPersianCalendarLibrary
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -262,14 +261,13 @@ class WorkCalendarView @JvmOverloads constructor(
     }
 
     private fun callOnScrolledManually() {
-        GlobalScope.launch {
-            delay(800)
+        Handler(Looper.getMainLooper()).postDelayed({
             onClickListenerPersianCalendarLibrary?.onPersianCalendarLibraryScrolled(
                 firstWorkCalendarModel = getFirstDayOfWeek(),
                 lastWorkCalendarModel = getLastDayOfWeek()
             )
             isManualScroll = true
-        }
+        }, 800)
     }
 
     private fun initializeView(attributeSet: AttributeSet? = null, defStyleAttr: Int) {
