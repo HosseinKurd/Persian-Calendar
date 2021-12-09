@@ -106,7 +106,6 @@ class WorkCalendarView @JvmOverloads constructor(
     }
 
     fun showNextWeek() {
-        println("showNextWeek ...")
         binding.recyclerViewDay.adapter?.let { adapter ->
             if (adapter is WorkCalendarAdapter) {
                 var lastDayOfWeekIndex =
@@ -120,7 +119,6 @@ class WorkCalendarView @JvmOverloads constructor(
     }
 
     fun showPastWeek() {
-        println("showPastWeek ...")
         binding.recyclerViewDay.adapter?.let { adapter ->
             if (adapter is WorkCalendarAdapter) {
                 var firstDayOfWeekIndex =
@@ -264,10 +262,8 @@ class WorkCalendarView @JvmOverloads constructor(
     }
 
     private fun callOnScrolledManually() {
-        println("callOnScrolledManually ...")
         GlobalScope.launch {
             delay(800)
-            println("callOnScrolledManually >> GlobalScope >> delay passed")
             onClickListenerPersianCalendarLibrary?.onPersianCalendarLibraryScrolled(
                 firstWorkCalendarModel = getFirstDayOfWeek(),
                 lastWorkCalendarModel = getLastDayOfWeek()
@@ -465,7 +461,6 @@ class WorkCalendarView @JvmOverloads constructor(
                                     calendar.add(Calendar.DATE, -1)
                                     val day = dateFormat.format(calendar.time)
                                     items.add(CalendarDayModel(isoDate = day))
-                                    println("day : $day")
                                 }
                                 addItemsToFist(items)
                             }
