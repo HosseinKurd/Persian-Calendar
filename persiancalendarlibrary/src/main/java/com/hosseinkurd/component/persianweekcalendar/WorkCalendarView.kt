@@ -20,6 +20,9 @@ import com.hosseinkurd.component.persianweekcalendar.utils.PersianCalendarConver
 import com.hosseinkurd.component.persianweekcalendar.utils.PublicFunctions
 import com.hosseinkurd.component.persianweekcalendar.utils.PublicValues
 import com.hosseinkurd.component.persianweekcalendar.utils.twoDigitsPersianCalendarLibrary
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -70,6 +73,7 @@ class WorkCalendarView @JvmOverloads constructor(
                     it.isSelected
                 }?.let { item ->
                     val index = adapter.items.indexOf(item)
+                    isManualScroll = false
                     binding.recyclerViewDay.scrollToPosition(index)
                     binding.textViewTitle.text = getYearMonth(item.isoDate!!)
                     callOnScrolledManually()
@@ -91,6 +95,7 @@ class WorkCalendarView @JvmOverloads constructor(
                     it.isoDate?.startsWith(nowAsString) ?: false
                 }?.let { item ->
                     val index = adapter.items.indexOf(item)
+                    isManualScroll = false
                     binding.recyclerViewDay.scrollToPosition(index)
                     adapter.changeSelectedItem(item)
                     binding.textViewTitle.text = getYearMonth(item.isoDate!!)
@@ -101,27 +106,28 @@ class WorkCalendarView @JvmOverloads constructor(
     }
 
     fun showNextWeek() {
+        println("showNextWeek ...")
         binding.recyclerViewDay.adapter?.let { adapter ->
             if (adapter is WorkCalendarAdapter) {
                 var lastDayOfWeekIndex =
                     (binding.recyclerViewDay.layoutManager as LinearLayoutManager).findLastVisibleItemPosition() + 7
-                if (lastDayOfWeekIndex >= adapter.itemCount) {
-                    lastDayOfWeekIndex = adapter.itemCount
-                }
-                binding.recyclerViewDay.scrollToPosition(lastDayOfWeekIndex)
+                if (lastDayOfWeekIndex >= adapter.itemCount) lastDayOfWeekIndex = adapter.itemCount
+                isManualScroll = false
+                binding.recyclerViewDay.smoothScrollToPosition(lastDayOfWeekIndex)
                 callOnScrolledManually()
             }
         }
     }
 
     fun showPastWeek() {
+        println("showPastWeek ...")
         binding.recyclerViewDay.adapter?.let { adapter ->
             if (adapter is WorkCalendarAdapter) {
                 var firstDayOfWeekIndex =
                     (binding.recyclerViewDay.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition() - 7
-                if (firstDayOfWeekIndex < 0)
-                    firstDayOfWeekIndex = 0
-                binding.recyclerViewDay.scrollToPosition(firstDayOfWeekIndex)
+                if (firstDayOfWeekIndex < 0) firstDayOfWeekIndex = 0
+                isManualScroll = false
+                binding.recyclerViewDay.smoothScrollToPosition(firstDayOfWeekIndex)
                 callOnScrolledManually()
             }
         }
@@ -258,10 +264,16 @@ class WorkCalendarView @JvmOverloads constructor(
     }
 
     private fun callOnScrolledManually() {
-        onClickListenerPersianCalendarLibrary?.onPersianCalendarLibraryScrolled(
-            firstWorkCalendarModel = getFirstDayOfWeek(),
-            lastWorkCalendarModel = getLastDayOfWeek()
-        )
+        println("callOnScrolledManually ...")
+        GlobalScope.launch {
+            delay(800)
+            println("callOnScrolledManually >> GlobalScope >> delay passed")
+            onClickListenerPersianCalendarLibrary?.onPersianCalendarLibraryScrolled(
+                firstWorkCalendarModel = getFirstDayOfWeek(),
+                lastWorkCalendarModel = getLastDayOfWeek()
+            )
+            isManualScroll = true
+        }
     }
 
     private fun initializeView(attributeSet: AttributeSet? = null, defStyleAttr: Int) {
@@ -333,6 +345,8 @@ class WorkCalendarView @JvmOverloads constructor(
         }
     }
 
+    private var isManualScroll = true
+
     private fun initializeListeners() {
         binding.imageViewStart.setOnClickListener {
             onClickListenerPersianCalendarLibrary?.onPersianCalendarLibraryStartClicked()
@@ -343,7 +357,7 @@ class WorkCalendarView @JvmOverloads constructor(
         binding.recyclerViewDay.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
-                if (RecyclerView.SCROLL_STATE_IDLE == newState) {
+                if (RecyclerView.SCROLL_STATE_IDLE == newState && isManualScroll) {
 //                    checkForPreviousDays()
 //                    checkFoNextDays()
                     onClickListenerPersianCalendarLibrary?.onPersianCalendarLibraryScrolled(

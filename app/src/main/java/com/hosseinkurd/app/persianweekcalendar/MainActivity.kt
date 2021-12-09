@@ -64,9 +64,11 @@ class MainActivity : AppCompatActivity() {
             ).show()
         }
         findViewById<Button>(R.id.buttonNextWeek).setOnClickListener {
+            println("buttonNextWeek ...")
             workCalendarView.showNextWeek()
         }
         findViewById<Button>(R.id.buttonPastWeek).setOnClickListener {
+            println("buttonPastWeek ...")
             workCalendarView.showPastWeek()
         }
         workCalendarView.onClickListenerPersianCalendarLibrary =
